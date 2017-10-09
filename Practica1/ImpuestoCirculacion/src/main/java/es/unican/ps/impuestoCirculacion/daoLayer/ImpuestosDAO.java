@@ -12,20 +12,20 @@ import es.unican.ps.impuestoCirculacion.domain.Vehiculo;
 
 
 public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
-	
+
 	private Ayuntamiento ayun;
-	
+
 	public ImpuestosDAO() {
 		ayun = Ayuntamiento.creaAyuntamiento();
 	}
 
-	 
+
 	public Contribuyente nuevoContribuyente(Contribuyente c) {
 		ayun.getContribuyentes().add(c);
 		return c;
 	}
 
-	 
+
 	public Contribuyente datosContribuyente(String dni) {
 		for (Contribuyente c: ayun.getContribuyentes()) {
 			if (c.getDni().equals(dni)) {
@@ -35,7 +35,7 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 		return null;
 	}
 
-	 
+
 	public Contribuyente actualizaContribuyente(Contribuyente nuevo) {
 		for (Contribuyente c: ayun.getContribuyentes()) {
 			if (c.getDni().equals(nuevo.getDni())) {
@@ -46,7 +46,7 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 		return null;
 	}
 
-	 
+
 	public Contribuyente eliminaContribuyente(String dni) {
 		for (Contribuyente c: ayun.getContribuyentes()) {
 			if (c.getDni().equals(dni)) {
@@ -57,29 +57,29 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 		return null;
 	}
 
-	 
+
 	public List<Contribuyente> contribuyentes() {
 		return ayun.getContribuyentes();
 	}
 
 
 
-	 
+
 	public Vehiculo creaVehiculo(Vehiculo v) {
-			return v;
+		return v;
 	}
 
-	 
+
 	public Vehiculo eliminaVehiculo(String matricula) {
 		return vehiculo(matricula);
 	}
 
-	 
+
 	public Vehiculo actualizaVehiculo(Vehiculo nuevo) {
 		return nuevo;
 	}
 
-	 
+
 	public Vehiculo vehiculo(String matricula) {
 		for (Contribuyente c:ayun.getContribuyentes()) {
 			for (Vehiculo v: c.getListaVehiculos()) {
@@ -91,7 +91,7 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 		return null;
 	}
 
-	 
+
 	public List<Vehiculo> vehiculos() {
 		List<Vehiculo> vehiculos = new LinkedList<Vehiculo>();
 		for (Contribuyente c:ayun.getContribuyentes()) {
@@ -100,16 +100,30 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 		return vehiculos;
 	}
 
-	 
+
 	public void finaliza() {
 		Ayuntamiento.flush(ayun);
-		
+
 	}
 
 
 	public Contribuyente creaContribuyente(Contribuyente c) {
-		// TODO Auto-generated method stub
-		return null;
+		boolean encontrado = false;
+
+		for(Contribuyente cont : contribuyentes())
+			if(c.equals(cont))
+			{
+				encontrado = true;
+				break;
+			}
+
+		if(encontrado)
+		{
+			return null;
+		}else{
+			nuevoContribuyente(c);
+			return c;
+		}
 	}
 
 
