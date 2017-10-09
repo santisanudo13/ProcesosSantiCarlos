@@ -111,7 +111,7 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 		boolean encontrado = false;
 
 		for(Contribuyente cont : contribuyentes())
-			if(c.equals(cont))
+			if(c.getDni().equals(cont.getDni()))
 			{
 				encontrado = true;
 				break;
@@ -128,7 +128,10 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 
 
 	public Contribuyente contribuyente(String dni) {
-		// TODO Auto-generated method stub
+		for(Contribuyente c: contribuyentes()){
+			if(c.getDni().equals(dni))
+				return c;	
+		}
 		return null;
 	}
 
