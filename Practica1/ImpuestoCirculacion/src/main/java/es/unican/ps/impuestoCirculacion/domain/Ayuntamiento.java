@@ -84,11 +84,13 @@ public class Ayuntamiento {
 	public static void flush(Ayuntamiento ayun) {
 		try {
 			JAXBContext jaxbctx = JAXBContext.newInstance(ObjectFactory.class);
-			// Volcar la ifnoramción a un fichero
+			// Volcar la ifnoramciï¿½n a un fichero
 			Marshaller marshaller = jaxbctx.createMarshaller();
-			marshaller.marshal(ayun, new File("C:/temp/ayuntamiento.xml"));
+			
+			File xml = new File("src/main/resources/ayuntamiento.xml");
+			marshaller.marshal(ayun, xml);
 		} catch (JAXBException e) {
-			System.out.println("No se puede volcar la información al fichero");
+			System.out.println("No se puede volcar la informaciï¿½n al fichero");
 			System.exit(0);
 		}
 	}
@@ -101,8 +103,8 @@ public class Ayuntamiento {
 			javax.xml.bind.Unmarshaller unmarshaller = jaxbctx
 					.createUnmarshaller();
 
-			return (Ayuntamiento) unmarshaller.unmarshal(new File(
-					"C:/temp/ayuntamiento.xml"));
+			File xml = new File("src/main/resources/ayuntamiento.xml");
+			return (Ayuntamiento) unmarshaller.unmarshal(xml);
 
 		} catch (JAXBException j) {
 			System.out.println("Error del JAXB");

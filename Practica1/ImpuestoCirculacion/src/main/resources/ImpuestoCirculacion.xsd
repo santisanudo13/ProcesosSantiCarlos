@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://www.example.org/ss/impuestoCirculacion" xmlns:tns="http://www.example.org/ss/impuestoCirculacion" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="ayuntamiento">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="contribuyente" type="tns:Contribuyente" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="Motocicleta">
+    <xs:complexContent>
+      <xs:extension base="tns:Vehiculo">
+        <xs:sequence/>
+        <xs:attribute name="cilindrada" type="xs:int" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Vehiculo" abstract="true">
+    <xs:sequence/>
+    <xs:attribute name="matricula" type="xs:string" use="required"/>
+    <xs:attribute name="Fecha1Matriculacion" type="xs:date" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Furgoneta">
+    <xs:complexContent>
+      <xs:extension base="tns:Vehiculo">
+        <xs:sequence/>
+        <xs:attribute name="potencia" type="xs:double" use="required"/>
+        <xs:attribute name="comercial" type="xs:boolean" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Turismo">
+    <xs:complexContent>
+      <xs:extension base="tns:Vehiculo">
+        <xs:sequence/>
+        <xs:attribute name="potencia" type="xs:double" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Contribuyente">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="turismo" type="tns:Turismo"/>
+        <xs:element name="furgoneta" type="tns:Furgoneta"/>
+        <xs:element name="motocicleta" type="tns:Motocicleta"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="Nombre" type="xs:string" use="required"/>
+    <xs:attribute name="Apellido1" type="xs:string" use="required"/>
+    <xs:attribute name="Apellido2" type="xs:string" use="required"/>
+    <xs:attribute name="dni" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:schema>
+
