@@ -51,8 +51,26 @@ public abstract class Vehiculo {
     @XmlAttribute(name = "Fecha1Matriculacion", required = true)
     @XmlSchemaType(name = "date")
     protected Date fecha1Matriculacion;
+    
+    
+    
+    public Vehiculo(){}
+    
+    
 
     /**
+	 * @param matricula
+	 * @param fecha1Matriculacion
+	 */
+	public Vehiculo(String matricula, Date fecha1Matriculacion) {
+		super();
+		this.matricula = matricula;
+		this.fecha1Matriculacion = fecha1Matriculacion;
+	}
+
+
+
+	/**
      * Obtiene el valor de la propiedad matricula.
      * 
      * @return
