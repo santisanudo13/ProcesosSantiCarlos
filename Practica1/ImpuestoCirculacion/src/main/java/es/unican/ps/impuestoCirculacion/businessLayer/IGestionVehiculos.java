@@ -9,6 +9,7 @@ public interface IGestionVehiculos extends ILifecycle {
 	public Vehiculo altaVehiculo(Vehiculo v, Contribuyente c);
 	
 	public Vehiculo bajaVehiculo(String matricula, Contribuyente c);
-	public Vehiculo vehiculo(String matricula);
+	
+	public Vehiculo vehiculo(String matricula); 	
 
 }

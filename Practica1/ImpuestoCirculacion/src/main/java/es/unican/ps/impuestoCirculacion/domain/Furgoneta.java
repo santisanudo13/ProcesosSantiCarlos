@@ -45,23 +45,7 @@ public class Furgoneta
     @XmlAttribute(name = "comercial", required = true)
     private boolean comercial;
 
-    public Furgoneta(){}
-    
-    
     /**
-	 * @param potencia
-	 * @param comercial
-     * @param matricula 
-     * @param fechaMatr 
-	 */
-	public Furgoneta(double potencia, boolean comercial, String matricula, Date fechaMatr) {
-		super(matricula, fechaMatr);
-		this.potencia = potencia;
-		this.comercial = comercial;
-	}
-
-
-	/**
      * Obtiene el valor de la propiedad potencia.
      * 
      */

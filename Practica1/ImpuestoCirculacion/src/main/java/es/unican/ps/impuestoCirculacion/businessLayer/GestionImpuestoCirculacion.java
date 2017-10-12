@@ -24,10 +24,9 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	 * @param c Contribuyente que se a�ade
 	 * @return El contribuyente a�adido
 	 * 		   null si no se a�ade porque ya existe
-	 * @throws YaExiste 
 	 */
 	
-	public Contribuyente altaContribuyente(Contribuyente c)   {
+	public Contribuyente altaContribuyente(Contribuyente c) {
 		return contribuyentes.creaContribuyente(c);
 	}
 
@@ -38,11 +37,9 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	 * @return El contribuyente eliminado
 	 * 		   null si no se elimina porque no se encuentra o tiene
 	 * 				veh�culos a su nombre
-	 * @throws NoExiste 
-	 * @throws VehiculosAsociados 
 	 */
 	
-	public Contribuyente bajaContribuyente(String dni){
+	public Contribuyente bajaContribuyente(String dni) {
 		return contribuyentes.eliminaContribuyente(dni);
 	}
 	
@@ -52,10 +49,9 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	 * @param dni DNI del contribuyente buscado
 	 * @return El valor a pagar en euros
 	 * 			Un valor negativo si el contribuyente no se encuentra
-	 * @throws NoExiste 
 	 */
 	
-	public double totalContribuyente(String dni){
+	public double totalContribuyente(String dni) {
 
 		double result = 1.0;
 		Contribuyente c = contribuyentes.contribuyente(dni);
@@ -73,16 +69,14 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	 * @param dni DNI del contribuyente buscado
 	 * @return El contribuyente cuyo dni coincide con el par�metro
 	 * 			null en caso de que no se encuentre
-	 * @throws NoExiste 
-	 * @throws VehiculosAsociados 
 	 */
 	
-	public Contribuyente contribuyente(String dni){
-		return contribuyentes.eliminaContribuyente(dni);
+	public Contribuyente contribuyente(String dni) {
+		return contribuyentes.datosContribuyente(dni);
 	}
 
 	
-	public Vehiculo altaVehiculo(Vehiculo v, Contribuyente c){
+	public Vehiculo altaVehiculo(Vehiculo v, Contribuyente c) {
 		c.getListaVehiculos().add(v);
 		contribuyentes.actualizaContribuyente(c);
 		return vehiculos.creaVehiculo(v);
@@ -90,7 +84,7 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	}
 
 	
-	public Vehiculo bajaVehiculo(String matricula, Contribuyente c){
+	public Vehiculo bajaVehiculo(String matricula, Contribuyente c) {
 		for (Vehiculo v:c.getListaVehiculos()) {
 			if (v.getMatricula().equals(matricula)) {
 				c.getListaVehiculos().remove(v);
@@ -103,7 +97,7 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	}
 
 	
-	public Vehiculo vehiculo(String matricula){
+	public Vehiculo vehiculo(String matricula) {
 		return vehiculos.vehiculo(matricula);
 	}
 

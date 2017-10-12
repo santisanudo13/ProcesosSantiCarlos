@@ -48,11 +48,6 @@ import javax.xml.bind.annotation.XmlType;
     "ListaVehiculos"
 })
 public class Contribuyente {
-	
-	
-	
-	
-	
 
     @XmlElements({
         @XmlElement(name = "turismo", type = Turismo.class),
@@ -69,27 +64,6 @@ public class Contribuyente {
     @XmlAttribute(name = "dni", required = true)
     private String dni;
 
-    public Contribuyente(){}
-    
-    
-    
-    
-    /**
-	 * @param listaVehiculos
-	 * @param nombre
-	 * @param apellido1
-	 * @param apellido2
-	 * @param dni
-	 */
-	public Contribuyente(List<Vehiculo> listaVehiculos, String nombre, String apellido1, String apellido2, String dni) {
-		super();
-		ListaVehiculos = listaVehiculos;
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.apellido2 = apellido2;
-		this.dni = dni;
-	}
-    
     /**
      * Gets the value of the turismoOrFurgonetaOrMotocicleta property.
      * 
@@ -114,7 +88,6 @@ public class Contribuyente {
      * 
      * 
      */
-    
     public List<Vehiculo> getListaVehiculos() {
         if (ListaVehiculos == null) {
         	ListaVehiculos = new ArrayList<Vehiculo>();
@@ -122,9 +95,7 @@ public class Contribuyente {
         return this.ListaVehiculos;
     }
 
-    
-
-	/**
+    /**
      * Obtiene el valor de la propiedad nombre.
      * 
      * @return

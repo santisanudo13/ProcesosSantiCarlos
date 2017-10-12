@@ -38,22 +38,8 @@ import javax.xml.bind.annotation.XmlType;
 public class Turismo
     extends Vehiculo
 {
-	
-	public Turismo(){}
-	
-	
 
-    /**
-	 * @param potencia
-	 */
-	public Turismo(String matricula, Date fechaMatr, double potencia) {
-		super(matricula, fechaMatr);
-		this.potencia = potencia;
-	}
-
-
-
-	@XmlAttribute(name = "potencia", required = true)
+    @XmlAttribute(name = "potencia", required = true)
     private double potencia;
 
     /**

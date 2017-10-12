@@ -1,24 +1,30 @@
 package es.unican.ps.impuestoCirculacion.presentationLayer;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.DefaultListModel;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
 
 import es.unican.ps.impuestoCirculacion.businessLayer.IGestionContribuyentes;
 import es.unican.ps.impuestoCirculacion.businessLayer.IGestionVehiculos;
 import es.unican.ps.impuestoCirculacion.domain.Contribuyente;
 import es.unican.ps.impuestoCirculacion.domain.Vehiculo;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JList;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+
+import java.awt.Color;
+import java.text.DecimalFormat;
 
 @SuppressWarnings("serial")
 public class VistaFuncionario extends JFrame {
@@ -76,6 +82,7 @@ public class VistaFuncionario extends JFrame {
 		contentPane.add(listVehiculos);
 		listVehiculos.setBorder(new LineBorder(new Color(0, 0, 0)));
 		listVehiculos.setModel(listModel);
+		listVehiculos.setName("listVehiculos");
 		
 		JLabel lblVehiculos = new JLabel("Vehiculos");
 		lblVehiculos.setBounds(149, 93, 65, 14);
@@ -100,9 +107,7 @@ public class VistaFuncionario extends JFrame {
 		contentPane.add(txtDniContribuyente);
 		txtDniContribuyente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-					rellenaDatosContribuyente(txtDniContribuyente.getText());
-				
+				rellenaDatosContribuyente(txtDniContribuyente.getText());
 			}
 		});
 		txtDniContribuyente.setColumns(10);
@@ -115,7 +120,7 @@ public class VistaFuncionario extends JFrame {
 		listVehiculos.setVisible(true);
 	}
 
-	private void rellenaDatosContribuyente(String dni)  {
+	private void rellenaDatosContribuyente(String dni) {
 		Contribuyente c = contribuyentes.contribuyente(dni);
 		if (c!=null) {
 			txtNombreContribuyente.setText(c.getNombre() + " "+c.getApellido1()+" "+c.getApellido2());
@@ -125,9 +130,9 @@ public class VistaFuncionario extends JFrame {
 				listModel.addElement(v.getMatricula());
 			}
 		} else {
-			txtNombreContribuyente.setText("DNI No V�lido");
+			txtNombreContribuyente.setText("DNI No Valido");
 			txtTotalContribuyente.setText("");
-			listModel.removeAllElements();
+			listModel.clear();
 		}
 		
 	}
