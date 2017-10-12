@@ -26,7 +26,7 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 	}
 
 
-	public Contribuyente datosContribuyente(String dni) {
+	public Contribuyente datosContribuyente(String dni)  {
 		for (Contribuyente c: ayun.getContribuyentes()) {
 			if (c.getDni().equals(dni)) {
 				return c;
@@ -36,7 +36,7 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 	}
 
 
-	public Contribuyente actualizaContribuyente(Contribuyente nuevo) {
+	public Contribuyente actualizaContribuyente(Contribuyente nuevo)  {
 		for (Contribuyente c: ayun.getContribuyentes()) {
 			if (c.getDni().equals(nuevo.getDni())) {
 				ayun.getContribuyentes().remove(c);
@@ -47,13 +47,18 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 	}
 
 
-	public Contribuyente eliminaContribuyente(String dni) {
+	public Contribuyente eliminaContribuyente(String dni)  {
 		for (Contribuyente c: ayun.getContribuyentes()) {
 			if (c.getDni().equals(dni)) {
-				ayun.getContribuyentes().remove(c);
-				return c;
+				if(c.getListaVehiculos().isEmpty()) {
+					ayun.getContribuyentes().remove(c);
+					return c;
+				}else {
+					return null;
+				}
 			}
 		}
+
 		return null;
 	}
 
@@ -80,7 +85,7 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 	}
 
 
-	public Vehiculo vehiculo(String matricula) {
+	public Vehiculo vehiculo(String matricula){
 		for (Contribuyente c:ayun.getContribuyentes()) {
 			for (Vehiculo v: c.getListaVehiculos()) {
 				if (v.getMatricula().equals(matricula)) {
@@ -107,7 +112,7 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 	}
 
 
-	public Contribuyente creaContribuyente(Contribuyente c) {
+	public Contribuyente creaContribuyente(Contribuyente c)  {
 		boolean encontrado = false;
 
 		for(Contribuyente cont : contribuyentes())

@@ -2,6 +2,7 @@ package es.unican.ps.impuestoCirculacion.daoLayer;
 
 import java.util.List;
 
+
 import es.unican.ps.common.ILifecycle;
 import es.unican.ps.impuestoCirculacion.domain.Contribuyente;
 

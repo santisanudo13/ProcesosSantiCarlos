@@ -11,6 +11,7 @@ public interface IGestionContribuyentes extends ILifecycle {
 	 * @param c Contribuyente que se añade
 	 * @return El contribuyente añadido
 	 * 		   null si no se añade porque ya existe
+	 * @throws YaExiste 
 	 */
 	public Contribuyente altaContribuyente(Contribuyente c);
 	
@@ -21,6 +22,8 @@ public interface IGestionContribuyentes extends ILifecycle {
 	 * @return El contribuyente eliminado
 	 * 		   null si no se elimina porque no se encuentra o tiene
 	 * 				vehículos a su nombre
+	 * @throws NoExiste 
+	 * @throws VehiculosAsociados 
 	 */
 	public Contribuyente bajaContribuyente(String dni);
 	
@@ -29,6 +32,8 @@ public interface IGestionContribuyentes extends ILifecycle {
 	 * @param dni DNI del contribuyente buscado
 	 * @return El contribuyente cuyo dni coincide con el parámetro
 	 * 			null en caso de que no se encuentre
+	 * @throws NoExiste 
+	 * @throws VehiculosAsociados 
 	 */
 	public Contribuyente contribuyente(String dni); 
 	
@@ -38,6 +43,7 @@ public interface IGestionContribuyentes extends ILifecycle {
 	 * @param dni DNI del contribuyente buscado
 	 * @return El valor a pagar en euros
 	 * 			Un valor negativo si el contribuyente no se encuentra
+	 * @throws NoExiste 
 	 */
 	public double totalContribuyente(String dni);
 
