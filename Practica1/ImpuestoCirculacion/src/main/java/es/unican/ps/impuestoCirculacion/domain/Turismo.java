@@ -41,8 +41,24 @@ public class Turismo
 
     @XmlAttribute(name = "potencia", required = true)
     private double potencia;
+    
+    
+    public Turismo(){}
+    
+    
 
     /**
+	 * @param 
+     * @param date 
+	 */
+	public Turismo(String matricula, Date date, int potencia) {
+		super(matricula, date);
+		this.potencia = potencia;
+	}
+
+
+
+	/**
      * Obtiene el valor de la propiedad potencia.
      * 
      */

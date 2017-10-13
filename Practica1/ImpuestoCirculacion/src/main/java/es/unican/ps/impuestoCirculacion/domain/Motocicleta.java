@@ -42,7 +42,23 @@ public class Motocicleta
     @XmlAttribute(name = "cilindrada", required = true)
     private int cilindrada;
 
+    
+    
+    public Motocicleta(){}
+    
+    
     /**
+	 * @param cilindrada
+     * @param matric 
+     * @param fech 
+	 */
+	public Motocicleta(int cilindrada, String matric, Date fech) {
+		super( matric,  fech);
+		this.cilindrada = cilindrada;
+	}
+
+
+	/**
      * Obtiene el valor de la propiedad cilindrada.
      * 
      */

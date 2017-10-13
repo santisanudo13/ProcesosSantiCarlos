@@ -64,7 +64,29 @@ public class Contribuyente {
     @XmlAttribute(name = "dni", required = true)
     private String dni;
 
-    /**
+    public Contribuyente(){}
+    
+    
+
+	/**
+	 * @param listaVehiculos
+	 * @param nombre
+	 * @param apellido1
+	 * @param apellido2
+	 * @param dni
+	 */
+	public Contribuyente(List<Vehiculo> listaVehiculos, String nombre, String apellido1, String apellido2, String dni) {
+		super();
+		ListaVehiculos = listaVehiculos;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.dni = dni;
+	}
+
+
+
+	/**
      * Gets the value of the turismoOrFurgonetaOrMotocicleta property.
      * 
      * <p>
