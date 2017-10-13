@@ -121,6 +121,13 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	public void finaliza() {
 		contribuyentes.finaliza();
 		vehiculos.finaliza();
+	}
+
+	public Contribuyente actualizaContribuyente(Contribuyente c) {
+		Contribuyente cont = contribuyentes.datosContribuyente(c.getDni());
+		if(cont==null)
+		return null;
+		return contribuyentes.actualizaContribuyente(c);
 	}	
 
 }

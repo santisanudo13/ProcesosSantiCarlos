@@ -40,5 +40,7 @@ public interface IGestionContribuyentes extends ILifecycle {
 	 * 			Un valor negativo si el contribuyente no se encuentra
 	 */
 	public double totalContribuyente(String dni);
+	
+	public Contribuyente actualizaContribuyente(Contribuyente c);
 
 }

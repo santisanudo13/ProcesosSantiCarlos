@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="PruebasUnitariasMetodos" project="ImpuestoCirculacion" tests="21" started="20" failures="0" errors="0" ignored="0">
+  <testsuite name="Testing.PruebasUnitariasMetodos" incomplete="true">
+    <testcase name="u3a" classname="Testing.PruebasUnitariasMetodos" time="0.018"/>
+    <testcase name="u3b" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u4a" classname="Testing.PruebasUnitariasMetodos" time="0.001"/>
+    <testcase name="u4b" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u4c" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u5a" classname="Testing.PruebasUnitariasMetodos" time="0.001"/>
+    <testcase name="u5b" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u6a" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u6b" classname="Testing.PruebasUnitariasMetodos" time="0.001"/>
+    <testcase name="u6c" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u7a" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u7b" classname="Testing.PruebasUnitariasMetodos" time="0.001"/>
+    <testcase name="u7c" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u8a" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u8b" classname="Testing.PruebasUnitariasMetodos" time="0.001"/>
+    <testcase name="u8c" classname="Testing.PruebasUnitariasMetodos" time="0.001"/>
+    <testcase name="u8d" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u9a" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u9b" classname="Testing.PruebasUnitariasMetodos" time="0.0"/>
+    <testcase name="u10a" classname="Testing.PruebasUnitariasMetodos" incomplete="true"/>
+    <testcase name="u10b" classname="Testing.PruebasUnitariasMetodos" incomplete="true"/>
+  </testsuite>
+</testrun>

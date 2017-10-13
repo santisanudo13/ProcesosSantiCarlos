@@ -37,9 +37,9 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 
 
 	public Contribuyente actualizaContribuyente(Contribuyente nuevo) {
-		for (Contribuyente c: ayun.getContribuyentes()) {
-			if (c.getDni().equals(nuevo.getDni())) {
-				ayun.getContribuyentes().remove(c);
+		for (Contribuyente cont: ayun.getContribuyentes()) {
+			if (cont.getDni().equals(nuevo.getDni())) {
+				ayun.getContribuyentes().remove(cont);
 				ayun.getContribuyentes().add(nuevo);
 				return nuevo;
 			}

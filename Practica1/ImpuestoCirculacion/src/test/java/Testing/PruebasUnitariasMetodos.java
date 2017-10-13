@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import es.unican.ps.impuestoCirculacion.businessLayer.GestionImpuestoCirculacion;
 import es.unican.ps.impuestoCirculacion.daoLayer.IContribuyentesDAO;
 import es.unican.ps.impuestoCirculacion.daoLayer.IVehiculosDAO;
+import es.unican.ps.impuestoCirculacion.daoLayer.ImpuestosDAO;
 import es.unican.ps.impuestoCirculacion.domain.Contribuyente;
 import es.unican.ps.impuestoCirculacion.domain.Motocicleta;
 import es.unican.ps.impuestoCirculacion.domain.Turismo;
@@ -31,7 +32,7 @@ public class PruebasUnitariasMetodos {
 
 	private static Contribuyente u3aContribuyente, u3bContribuyente, u4aContribuyente, u4bContribuyente,u4cContribuyente,
 	u7aContribuyente, u7bContribuyente,u7cContribuyente, u8aContribuyente, u8bContribuyente,u8cContribuyente, u8dContribuyente, 
-	u5aContribuyente, u5bContribuyente, u6aContribuyente, u6bContribuyente, u6cContribuyente;
+	u5aContribuyente, u5bContribuyente, u6aContribuyente, u6bContribuyente, u6cContribuyente, u10aContribuyente, u10bContribuyente;
 	private static Vehiculo u7aVehiculo, u7bVehiculo, u7cVehiculo, u8aVehiculo, u8bVehiculo, u8cVehiculo, u8dVehiculo, u9aVehiculo, u9bVehiculo;
 
 
@@ -85,12 +86,14 @@ public class PruebasUnitariasMetodos {
 		u8cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121A");
 		u8dContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "78493121S");
 
+		u10aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Lopez", "78934831M");
+		u10bContribuyente =  new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Lopez", "78935831M");
 	}
 
 	
 
 	/**
-	 * u3.a Contribuyente “Lidia López Revuelta 72081145Z” intenta darse de alta -> se da de alta correctamente
+	 * u3.a Contribuyente â€œLidia LÃ³pez Revuelta 72081145Zâ€� intenta darse de alta -> se da de alta correctamente
 	 */
 	@Test
 	public void u3a(){
@@ -103,7 +106,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * u3.b Contribuyente “Víctor Gómez Cobo 72189333S” intenta darse de alta -> se da un error porque ya existe 
+	 * u3.b Contribuyente â€œVÃ­ctor GÃ³mez Cobo 72189333Sâ€� intenta darse de alta -> se da un error porque ya existe 
 	 */
 	@Test
 	public void u3b(){
@@ -115,7 +118,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * u4.a Contribuyente “72081145Z” intenta darse de baja -> se da de baja correctamente  
+	 * u4.a Contribuyente â€œ72081145Zâ€� intenta darse de baja -> se da de baja correctamente  
 	 */
 	@Test
 	public void u4a(){
@@ -127,7 +130,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * u4.b Contribuyente “72189333S” intenta darse de baja -> se da un error porque tiene vehículos asociados 
+	 * u4.b Contribuyente â€œ72189333Sâ€� intenta darse de baja -> se da un error porque tiene vehÃ­culos asociados 
 	 */
 	@Test
 	public void u4b(){
@@ -139,7 +142,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * u4.c Contribuyente “72177733S” intenta darse de baja -> se da un error porque no existe  AS3
+	 * u4.c Contribuyente â€œ72177733Sâ€� intenta darse de baja -> se da un error porque no existe  AS3
 	 */
 	@Test
 	public void u4c(){
@@ -153,7 +156,7 @@ public class PruebasUnitariasMetodos {
 
 
 	/**
-	 * u5.a Contribuyente “78934831M” intenta consultarse -> el sistema muestra los datos correctamente porque el contribuyente existe   
+	 * u5.a Contribuyente â€œ78934831Mâ€� intenta consultarse -> el sistema muestra los datos correctamente porque el contribuyente existe   
 	 */
 	@Test
 	public void u5a(){
@@ -167,7 +170,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * u5.b Contribuyente “78955831M” intenta consultarse -> se da un error porque el contribuyente no existe 
+	 * u5.b Contribuyente â€œ78955831Mâ€� intenta consultarse -> se da un error porque el contribuyente no existe 
 	 */
 	@Test
 	public void u5b(){
@@ -179,7 +182,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * U6.a Se intenta consultar el total del contribuyente con DNI “78934831M” -> como el contribuyente existe, retorna 239.8.
+	 * U6.a Se intenta consultar el total del contribuyente con DNI â€œ78934831Mâ€� -> como el contribuyente existe, retorna 239.8.
 	 */
 	@Test
 	public void u6a(){
@@ -193,7 +196,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * U6.b Se intenta consultar el total del contribuyente con DNI “78934835M” -> como no existe, retorna un valor que indique fallo.
+	 * U6.b Se intenta consultar el total del contribuyente con DNI â€œ78934835Mâ€� -> como no existe, retorna un valor que indique fallo.
 	 */
 	@Test
 	public void u6b(){
@@ -207,7 +210,7 @@ public class PruebasUnitariasMetodos {
 	
 
 	/**
-	 * U6.c Se intenta consultar el total de un contribuyente con DNI “72081145Z”, que no tiene vehículos -> retorna 0.
+	 * U6.c Se intenta consultar el total de un contribuyente con DNI â€œ72081145Zâ€�, que no tiene vehiÌ�culos -> retorna 0.
 	 */
 	@Test
 	public void u6c(){
@@ -222,7 +225,7 @@ public class PruebasUnitariasMetodos {
 
 
 	/**
-	 * u7.a Vehículo “2020AAA 10/10/2003 para el usuario con DNI 72345121A” intenta darse de alta -> se da de alta correctamente 
+	 * u7.a VehÃ­culo â€œ2020AAA 10/10/2003 para el usuario con DNI 72345121Aâ€� intenta darse de alta -> se da de alta correctamente 
 	 */
 	@Test
 	public void u7a(){
@@ -235,7 +238,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * u7.b Vehículo “2021AAA 10/10/2003 para el usuario con DNI 72355121A” intenta darse de alta -> se da un error porque no existe el contribuyente  
+	 * u7.b VehÃ­culo â€œ2021AAA 10/10/2003 para el usuario con DNI 72355121Aâ€� intenta darse de alta -> se da un error porque no existe el contribuyente  
 	 */
 	@Test
 	public void u7b(){
@@ -247,7 +250,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * u7.c Vehículo “2020AAA 10/10/2003 para el usuario con DNI 71345631P” intenta darse de alta -> se da un error porque ya existe el vehículo 
+	 * u7.c VehÃ­culo â€œ2020AAA 10/10/2003 para el usuario con DNI 71345631Pâ€� intenta darse de alta -> se da un error porque ya existe el vehÃ­culo 
 	 */
 	@Test
 	public void u7c(){
@@ -261,7 +264,7 @@ public class PruebasUnitariasMetodos {
 	
 
 	/**
-	 * u8.a Vehículo “2020AAA para el usuario con DNI 72345121A” intenta darse de baja -> se da de baja correctamente 
+	 * u8.a VehÃ­culo â€œ2020AAA para el usuario con DNI 72345121Aâ€� intenta darse de baja -> se da de baja correctamente 
 	 */
 	@Test
 	public void u8a(){
@@ -275,7 +278,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * u8.b Vehículo “2220AAA para el usuario con DNI 72345121A” intenta darse de baja -> se da un error porque no existe el vehículo 
+	 * u8.b VehÃ­culo â€œ2220AAA para el usuario con DNI 72345121Aâ€� intenta darse de baja -> se da un error porque no existe el vehÃ­culo 
 	 */
 	@Test
 	public void u8b(){
@@ -289,7 +292,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * u8.c Vehículo “2020AAA para el usuario con DNI 72215121A” intenta darse de baja -> se da un error porque no existe el contribuyente
+	 * u8.c VehÃ­culo â€œ2020AAA para el usuario con DNI 72215121Aâ€� intenta darse de baja -> se da un error porque no existe el contribuyente
 	 */
 	@Test
 	public void u8c(){
@@ -302,7 +305,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * u8.d Vehículo “1237HDT para el usuario con DNI 78493121S” intenta darse de baja -> se da un error porque el vehículo no pertenece al contribuyente 
+	 * u8.d VehÃ­culo â€œ1237HDT para el usuario con DNI 78493121Sâ€� intenta darse de baja -> se da un error porque el vehÃ­culo no pertenece al contribuyente 
 	 */
 	@Test
 	public void u8d(){
@@ -316,7 +319,7 @@ public class PruebasUnitariasMetodos {
 	}
 
 	/**
-	 * U9.a Vehículo “9424BGD” intenta consultarse -> el sistema muestra los datos correctamente porque el vehículo existe
+	 * U9.a VehiÌ�culo â€œ9424BGDâ€� intenta consultarse -> el sistema muestra los datos correctamente porque el vehiÌ�culo existe
 	 */
 	@Test
 	public void u9a(){
@@ -330,7 +333,7 @@ public class PruebasUnitariasMetodos {
 
 
 	/**
-	 * U9.b Vehículo “9424GGD” intenta consultarse -> se da un error porque el vehículo no existe
+	 * U9.b VehiÌ�culo â€œ9424GGDâ€� intenta consultarse -> se da un error porque el vehiÌ�culo no existe
 	 */
 	@Test
 	public void u9b(){
@@ -339,6 +342,36 @@ public class PruebasUnitariasMetodos {
 		
 		Vehiculo vOutput;
 		vOutput = gestion.vehiculo(u9bVehiculo.getMatricula());
+		assertTrue(vOutput == null);	
+	}
+	/**
+	 * U10.a Intentamos actualizar un contribuyente con DNI “78934831M” cambiándole su segundo
+apellido por “López” -> se actualizan los datos correctamente porque el contribuyente existe y
+se devuelve el contribuyente actualizado.
+	 */
+	@Test
+	public void u10a(){
+		when(contribuyentes.datosContribuyente(u10aContribuyente.getDni())).thenReturn(u10aContribuyente); 
+		when(contribuyentes.actualizaContribuyente(u10aContribuyente)).then
+		
+		
+		Contribuyente vOutput;
+		vOutput = gestion.actualizaContribuyente(u10aContribuyente);
+		assertTrue(vOutput.equals(u10aContribuyente));
+	}
+	/**
+	 * U10.b Intentamos actualizar un contribuyente con DNI “78935831M” cambiándole su segundo
+apellido por “López” -> se indica que ha habido un error porque no existe un contribuyente
+con dicho DNI y no se actualiza nada.
+	 */
+	@Test
+	public void u10b(){
+		when(contribuyentes.datosContribuyente(u10bContribuyente.getDni())).thenReturn(null); 
+		
+		
+		
+		Contribuyente vOutput;
+		vOutput = gestion.actualizaContribuyente(u10bContribuyente);
 		assertTrue(vOutput == null);	
 	}
 }
