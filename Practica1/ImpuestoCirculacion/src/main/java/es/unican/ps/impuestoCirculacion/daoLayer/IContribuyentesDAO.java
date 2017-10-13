@@ -13,7 +13,6 @@ public interface IContribuyentesDAO extends ILifecycle {
 	public Contribuyente actualizaContribuyente(Contribuyente nuevo);
 	public Contribuyente eliminaContribuyente(String dni);
 	public List<Contribuyente> contribuyentes();
-	public Contribuyente creaContribuyente(Contribuyente c);
-	public Contribuyente contribuyente(String dni);
+	
 	
 }

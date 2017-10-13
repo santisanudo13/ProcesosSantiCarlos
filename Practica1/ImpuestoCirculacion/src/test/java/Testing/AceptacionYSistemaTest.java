@@ -40,7 +40,7 @@ public class AceptacionYSistemaTest {
 	 * AS5.a Contribuyente â€œ78934831Mâ€� intenta consultarse -> el sistema muestra los datos correctamente porque el contribuyente existe   
 	 */
 	@Test
-	public void as5a(){
+	public void u2a(){
 		frame.textBox("dniContribuyente").enterText("78934831M").pressAndReleaseKey(KeyPressInfo.keyCode(KeyEvent.VK_ENTER));
 
 		frame.textBox("nombreContribuyente").requireText("Amador Rivas Cobo");
@@ -53,7 +53,7 @@ public class AceptacionYSistemaTest {
 	 * AS5.b Contribuyente â€œ78955831Mâ€� intenta consultarse -> se da un error porque el contribuyente no existe 
 	 */
 	@Test
-	public void as5b(){
+	public void u2b(){
 		frame.textBox("dniContribuyente").enterText("78955831M").pressAndReleaseKey(KeyPressInfo.keyCode(KeyEvent.VK_ENTER));
 
 		frame.textBox("nombreContribuyente").requireText("DNI No Valido");

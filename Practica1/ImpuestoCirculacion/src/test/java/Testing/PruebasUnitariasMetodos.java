@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,225 +15,330 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import es.unican.ps.impuestoCirculacion.businessLayer.GestionImpuestoCirculacion;
-import es.unican.ps.impuestoCirculacion.businessLayer.IGestionContribuyentes;
-import es.unican.ps.impuestoCirculacion.businessLayer.IGestionVehiculos;
+import es.unican.ps.impuestoCirculacion.daoLayer.IContribuyentesDAO;
+import es.unican.ps.impuestoCirculacion.daoLayer.IVehiculosDAO;
 import es.unican.ps.impuestoCirculacion.domain.Contribuyente;
+import es.unican.ps.impuestoCirculacion.domain.Motocicleta;
 import es.unican.ps.impuestoCirculacion.domain.Turismo;
 import es.unican.ps.impuestoCirculacion.domain.Vehiculo;
 
 public class PruebasUnitariasMetodos {
 
-	private static IGestionContribuyentes gestionContribuyentes = mock(IGestionContribuyentes.class);
-	private static IGestionVehiculos gestionVehiculos = mock(IGestionVehiculos.class);
+	private static IContribuyentesDAO contribuyentes = mock(IContribuyentesDAO.class);
+	private static IVehiculosDAO vehiculos = mock(IVehiculosDAO.class);
+	private static GestionImpuestoCirculacion gestion = new GestionImpuestoCirculacion(contribuyentes, vehiculos);
 
 
-	private static Contribuyente as1aContribuyente, as1bContribuyente, as2aContribuyente, as2bContribuyente,as2cContribuyente,
-	as3aContribuyente, as3bContribuyente,as3cContribuyente, as4aContribuyente, as4bContribuyente,as4cContribuyente, as4dContribuyente, 
-	as5aContribuyente, as5bContribuyente;
-	private static Vehiculo as3aVehiculo, as3bVehiculo, as3cVehiculo, as4aVehiculo, as4bVehiculo, as4cVehiculo, as4dVehiculo;
-	
+	private static Contribuyente u3aContribuyente, u3bContribuyente, u4aContribuyente, u4bContribuyente,u4cContribuyente,
+	u7aContribuyente, u7bContribuyente,u7cContribuyente, u8aContribuyente, u8bContribuyente,u8cContribuyente, u8dContribuyente, 
+	u5aContribuyente, u5bContribuyente, u6aContribuyente, u6bContribuyente, u6cContribuyente;
+	private static Vehiculo u7aVehiculo, u7bVehiculo, u7cVehiculo, u8aVehiculo, u8bVehiculo, u8cVehiculo, u8dVehiculo, u9aVehiculo, u9bVehiculo;
+
 
 	@SuppressWarnings("deprecation")
 	@BeforeClass
 	public static void init(){
 
 		//		Contribuyentes
-		as1aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72081145Z");
-		as1bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72189333S");
+		u3aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72081145Z");
+		u3bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72189333S");
 
-		as2aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72081145Z");
-		as2bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72189333S");
-		as2cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72177733S");
+		u4aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72081145Z");
+		u4bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72189333S");
+		u4cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72177733S");
 
-		as3aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72345121A");
-		as3bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72355121A");
-		as3cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "71345631P");
+		u5aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "78934831M");
+		u5bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72189333S");
 
-		as4aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72345121A");
-		as4bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72345121A");
-		as4cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121A");
-		as4dContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "78493121S");
+		List<Vehiculo> list = new ArrayList<Vehiculo>();
+		list.add(new Turismo("3456HDP", new Date(), 17));
+		list.add(new Motocicleta(700, "1234BBB", new Date()));
+		u6aContribuyente = new Contribuyente(list, "Lidia", "Lopez", "Revuelta", "78934831M");
+		u6bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "78934835M");
+		u6cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72081145Z");
 
-		as5aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "78934831M");
-		as5bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72189333S");
+		u7aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72345121A");
+		u7bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72355121A");
+		u7cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "71345631P");
+
+		
+
 
 		//		Vehiculos
-		as3aVehiculo = new Turismo("2020AAA", new Date(2003, 10, 10), 20);
-		as3bVehiculo = new Turismo("2021AAA", new Date(2003, 10, 10), 20);
-		as3cVehiculo = new Turismo("2020AAA", new Date(2003, 10, 10), 20);
+		u7aVehiculo = new Turismo("2020AAA", new Date(2003, 10, 10), 20);
+		u7bVehiculo = new Turismo("2021AAA", new Date(2003, 10, 10), 20);
+		u7cVehiculo = new Turismo("2020AAA", new Date(2003, 10, 10), 20);
 
-		as4aVehiculo = new Turismo("2020AAA", new Date(), 20);
-		as4bVehiculo = new Turismo("2220AAA", new Date(), 20);
-		as4cVehiculo = new Turismo("2020AAA", new Date(), 20);
-		as4dVehiculo = new Turismo("1237HDT", new Date(), 20);
+		u8aVehiculo = new Turismo("2020AAA", new Date(), 20);
+		u8bVehiculo = new Turismo("2220AAA", new Date(), 20);
+		u8cVehiculo = new Turismo("2020AAA", new Date(), 20);
+		u8dVehiculo = new Turismo("1237HDT", new Date(), 20);
 
-		//		AS1
-		when(gestionContribuyentes.altaContribuyente(as1aContribuyente)).thenReturn(as1aContribuyente); // Caso as1a
-		when(gestionContribuyentes.altaContribuyente(as1bContribuyente)).thenReturn(null); //Caso as1b
-		//		AS2
-		when(gestionContribuyentes.bajaContribuyente(as2aContribuyente.getDni())).thenReturn(as2aContribuyente); //Caso as2a
-		when(gestionContribuyentes.bajaContribuyente(as2bContribuyente.getDni())).thenReturn(null); //Caso as2a
-		when(gestionContribuyentes.bajaContribuyente(as2cContribuyente.getDni())).thenReturn(null); //Caso as2c
-		//		AS3
-		when(gestionVehiculos.altaVehiculo(as3aVehiculo, as3aContribuyente)).thenReturn(as3aVehiculo); //Caso as3a
-		when(gestionVehiculos.altaVehiculo(as3bVehiculo, as3bContribuyente)).thenReturn(null); //Caso as3b
-		when(gestionVehiculos.altaVehiculo(as3cVehiculo, as3cContribuyente)).thenReturn(null); //Caso as3c
-		//		AS4
-		when(gestionVehiculos.bajaVehiculo(as4aVehiculo.getMatricula(), as4aContribuyente)).thenReturn(as4aVehiculo); //Caso as4a
-		when(gestionVehiculos.bajaVehiculo(as4bVehiculo.getMatricula(), as4bContribuyente)).thenReturn(null); //Caso as4b
-		when(gestionVehiculos.bajaVehiculo(as4cVehiculo.getMatricula(), as4cContribuyente)).thenReturn(null); //Caso as4c
-		when(gestionVehiculos.bajaVehiculo(as4dVehiculo.getMatricula(), as4dContribuyente)).thenReturn(null); //Caso as4d
-		//		AS5
-		when(gestionContribuyentes.contribuyente(as5aContribuyente.getDni())).thenReturn(as5aContribuyente); // Caso as5a
-		when(gestionContribuyentes.contribuyente(as5bContribuyente.getDni())).thenReturn(null); // Caso as5b
+		u9aVehiculo = new Turismo("9424BGD", new Date(), 20);
+		u9bVehiculo = new Turismo("9424GGD", new Date(), 20);
+
+		
+		List<Vehiculo> listu8 = new ArrayList<Vehiculo>();
+		listu8.add(u8aVehiculo);
+		u8aContribuyente = new Contribuyente(listu8, "Lidia", "Lopez", "Revuelta", "72345121A");
+		u8bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72345121A");
+		u8cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121A");
+		u8dContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "78493121S");
+
 	}
 
-
+	
 
 	/**
-	 * AS1.a Contribuyente “Lidia López Revuelta 72081145Z” intenta darse de alta -> se da de alta correctamente
+	 * u3.a Contribuyente “Lidia López Revuelta 72081145Z” intenta darse de alta -> se da de alta correctamente
 	 */
 	@Test
-	public void as1a(){
+	public void u3a(){
+		when(contribuyentes.nuevoContribuyente(u3aContribuyente)).thenReturn(u3aContribuyente); // Caso u3a
+
 		Contribuyente cOutput;
-		cOutput = gestionContribuyentes.altaContribuyente(as1aContribuyente);
-		assertTrue(cOutput.equals(as1aContribuyente));
+		cOutput = gestion.altaContribuyente(u3aContribuyente);
+		assertTrue(cOutput.equals(u3aContribuyente));
 
 	}
 
 	/**
-	 * AS1.b Contribuyente “Víctor Gómez Cobo 72189333S” intenta darse de alta -> se da un error porque ya existe 
+	 * u3.b Contribuyente “Víctor Gómez Cobo 72189333S” intenta darse de alta -> se da un error porque ya existe 
 	 */
 	@Test
-	public void as1b(){
+	public void u3b(){
+		when(contribuyentes.nuevoContribuyente(u3bContribuyente)).thenReturn(null); //Caso u3b
+
 		Contribuyente cOutput;
-		cOutput = gestionContribuyentes.altaContribuyente(as1bContribuyente);
+		cOutput = gestion.altaContribuyente(u3bContribuyente);
 		assertTrue(cOutput == (null));
 	}
 
 	/**
-	 * AS2.a Contribuyente “72081145Z” intenta darse de baja -> se da de baja correctamente  
+	 * u4.a Contribuyente “72081145Z” intenta darse de baja -> se da de baja correctamente  
 	 */
 	@Test
-	public void as2a(){
+	public void u4a(){
+		when(contribuyentes.eliminaContribuyente(u4aContribuyente.getDni())).thenReturn(u4aContribuyente); //Caso u4a
+
 		Contribuyente cOutput;
-		cOutput = gestionContribuyentes.bajaContribuyente(as2aContribuyente.getDni());
-		assertTrue(cOutput.equals(as2aContribuyente));
+		cOutput = gestion.bajaContribuyente(u4aContribuyente.getDni());
+		assertTrue(cOutput.equals(u4aContribuyente));
 	}
 
 	/**
-	 * AS2.b Contribuyente “72189333S” intenta darse de baja -> se da un error porque tiene vehículos asociados 
+	 * u4.b Contribuyente “72189333S” intenta darse de baja -> se da un error porque tiene vehículos asociados 
 	 */
 	@Test
-	public void as2b(){
+	public void u4b(){
+		when(contribuyentes.eliminaContribuyente(u4bContribuyente.getDni())).thenReturn(null); //Caso u4a
+
 		Contribuyente cOutput;
-		cOutput = gestionContribuyentes.bajaContribuyente(as2bContribuyente.getDni());
+		cOutput = gestion.bajaContribuyente(u4bContribuyente.getDni());
 		assertTrue(cOutput == (null));
 	}
 
 	/**
-	 * AS2.c Contribuyente “72177733S” intenta darse de baja -> se da un error porque no existe  AS3
+	 * u4.c Contribuyente “72177733S” intenta darse de baja -> se da un error porque no existe  AS3
 	 */
 	@Test
-	public void as2c(){
-		Contribuyente cOutput;
-		cOutput = gestionContribuyentes.bajaContribuyente(as2cContribuyente.getDni());
-		assertTrue(cOutput == (null));
-	}
+	public void u4c(){
+		when(contribuyentes.eliminaContribuyente(u4cContribuyente.getDni())).thenReturn(null); //Caso u4c
 
-	/**
-	 * AS3.a Vehículo “2020AAA 10/10/2003 para el usuario con DNI 72345121A” intenta darse de alta -> se da de alta correctamente 
-	 */
-	@Test
-	public void as3a(){
-		Vehiculo vOutput;
-		vOutput = gestionVehiculos.altaVehiculo(as3aVehiculo, as3aContribuyente);
-		assertTrue(vOutput.equals(as3aVehiculo));
-	}
-
-	/**
-	 * AS3.b Vehículo “2021AAA 10/10/2003 para el usuario con DNI 72355121A” intenta darse de alta -> se da un error porque no existe el contribuyente  
-	 */
-	@Test
-	public void as3b(){
-		Vehiculo vOutput;
-		vOutput = gestionVehiculos.altaVehiculo(as3bVehiculo, as3bContribuyente);
-		assertTrue(vOutput == (null));	
-	}
-	
-	/**
-	 * AS3.c Vehículo “2020AAA 10/10/2003 para el usuario con DNI 71345631P” intenta darse de alta -> se da un error porque ya existe el vehículo 
-	 */
-	@Test
-	public void as3c(){
-		Vehiculo vOutput;
-		vOutput = gestionVehiculos.altaVehiculo(as3cVehiculo, as3cContribuyente);
-		assertTrue(vOutput == (null));	
-	}
-	
-	/**
-	 * AS4.a Vehículo “2020AAA para el usuario con DNI 72345121A” intenta darse de baja -> se da de baja correctamente 
-	 */
-	@Test
-	public void as4a(){
-		Vehiculo vOutput;
-		vOutput = gestionVehiculos.bajaVehiculo(as4aVehiculo.getMatricula(), as4aContribuyente);
-		assertTrue(vOutput.equals(as4aVehiculo));
-	}
-	
-	/**
-	 * AS4.b Vehículo “2220AAA para el usuario con DNI 72345121A” intenta darse de baja -> se da un error porque no existe el vehículo 
-	 */
-	@Test
-	public void as4b(){
-		Vehiculo vOutput;
-		vOutput = gestionVehiculos.bajaVehiculo(as4bVehiculo.getMatricula(), as4bContribuyente);
-		assertTrue(vOutput == (null));	
-	}
-	
-	/**
-	 * AS4.c Vehículo “2020AAA para el usuario con DNI 72215121A” intenta darse de baja -> se da un error porque no existe el contribuyente
-	 */
-	@Test
-	public void as4c(){
-		Vehiculo vOutput;
-		vOutput = gestionVehiculos.bajaVehiculo(as4cVehiculo.getMatricula(), as4cContribuyente);
-		assertTrue(vOutput == (null));	
-	}
-	
-	/**
-	 * AS4.d Vehículo “1237HDT para el usuario con DNI 78493121S” intenta darse de baja -> se da un error porque el vehículo no pertenece al contribuyente 
-	 */
-	@Test
-	public void as4d(){
-		Vehiculo vOutput;
-		vOutput = gestionVehiculos.bajaVehiculo(as4dVehiculo.getMatricula(), as4dContribuyente);
-		assertTrue(vOutput == (null));	
-	}
-	
-	/**
-	 * AS5.a Contribuyente “78934831M” intenta consultarse -> el sistema muestra los datos correctamente porque el contribuyente existe   
-	 */
-	@Test
-	public void as5a(){
 		Contribuyente cOutput;
-		cOutput = gestionContribuyentes.contribuyente(as5aContribuyente.getDni());
-		assertTrue(cOutput.equals(as5aContribuyente));
-	}
-	
-	/**
-	 * AS5.b Contribuyente “78955831M” intenta consultarse -> se da un error porque el contribuyente no existe 
-	 */
-	@Test
-	public void as5b(){
-		Contribuyente cOutput;
-		cOutput = gestionContribuyentes.contribuyente(as5bContribuyente.getDni());
+		cOutput = gestion.bajaContribuyente(u4cContribuyente.getDni());
 		assertTrue(cOutput == (null));
 	}
 
 
 
+	/**
+	 * u5.a Contribuyente “78934831M” intenta consultarse -> el sistema muestra los datos correctamente porque el contribuyente existe   
+	 */
+	@Test
+	public void u5a(){
+		when(contribuyentes.datosContribuyente(u5aContribuyente.getDni())).thenReturn(u5aContribuyente); // Caso u5a
 
+		Contribuyente cOutput;
+		cOutput = gestion.contribuyente(u5aContribuyente.getDni());
+		
+		
+		assertTrue(cOutput.equals(u5aContribuyente));
+	}
 
+	/**
+	 * u5.b Contribuyente “78955831M” intenta consultarse -> se da un error porque el contribuyente no existe 
+	 */
+	@Test
+	public void u5b(){
+		when(contribuyentes.datosContribuyente(u5bContribuyente.getDni())).thenReturn(null); // Caso u5b
+
+		Contribuyente cOutput;
+		cOutput = gestion.contribuyente(u5bContribuyente.getDni());
+		assertTrue(cOutput == (null));
+	}
+
+	/**
+	 * U6.a Se intenta consultar el total del contribuyente con DNI “78934831M” -> como el contribuyente existe, retorna 239.8.
+	 */
+	@Test
+	public void u6a(){
+		when(contribuyentes.datosContribuyente(u6aContribuyente.getDni())).thenReturn(u6aContribuyente); // Caso u6a
+
+		Double cOutput;
+		cOutput = gestion.totalContribuyente(u6aContribuyente.getDni());
+		
+		
+		assertTrue(cOutput.equals(239.8));
+	}
+
+	/**
+	 * U6.b Se intenta consultar el total del contribuyente con DNI “78934835M” -> como no existe, retorna un valor que indique fallo.
+	 */
+	@Test
+	public void u6b(){
+		when(contribuyentes.datosContribuyente(u6bContribuyente.getDni())).thenReturn(null); // Caso u6b
+
+		Double cOutput;
+		cOutput = gestion.totalContribuyente(u6bContribuyente.getDni());
+		assertTrue(cOutput < 0.0);
+
+	}
 	
+
+	/**
+	 * U6.c Se intenta consultar el total de un contribuyente con DNI “72081145Z”, que no tiene vehículos -> retorna 0.
+	 */
+	@Test
+	public void u6c(){
+		when(contribuyentes.datosContribuyente(u6cContribuyente.getDni())).thenReturn(u6cContribuyente); // Caso u6a
+
+		Double cOutput;
+		cOutput = gestion.totalContribuyente(u6cContribuyente.getDni());
+		
+		
+		assertTrue(cOutput.equals(0.0));
+	}
+
+
+	/**
+	 * u7.a Vehículo “2020AAA 10/10/2003 para el usuario con DNI 72345121A” intenta darse de alta -> se da de alta correctamente 
+	 */
+	@Test
+	public void u7a(){
+		when(vehiculos.creaVehiculo(u7aVehiculo)).thenReturn(u7aVehiculo); // Caso u6a
+		when(contribuyentes.datosContribuyente(u7aContribuyente.getDni())).thenReturn(u7aContribuyente); // Caso u6a
+
+		Vehiculo vOutput;
+		vOutput = gestion.altaVehiculo(u7aVehiculo, u7aContribuyente);
+		assertTrue(vOutput.equals(u7aVehiculo));
+	}
+
+	/**
+	 * u7.b Vehículo “2021AAA 10/10/2003 para el usuario con DNI 72355121A” intenta darse de alta -> se da un error porque no existe el contribuyente  
+	 */
+	@Test
+	public void u7b(){
+		when(contribuyentes.datosContribuyente(u7bContribuyente.getDni())).thenReturn(null); 
+
+		Vehiculo vOutput;
+		vOutput = gestion.altaVehiculo(u7bVehiculo, u7bContribuyente);
+		assertTrue(vOutput == (null));	
+	}
+
+	/**
+	 * u7.c Vehículo “2020AAA 10/10/2003 para el usuario con DNI 71345631P” intenta darse de alta -> se da un error porque ya existe el vehículo 
+	 */
+	@Test
+	public void u7c(){
+		when(vehiculos.vehiculo(u7cVehiculo.getMatricula())).thenReturn(null); 
+		when(contribuyentes.datosContribuyente(u7cContribuyente.getDni())).thenReturn(u7cContribuyente);
+		
+		Vehiculo vOutput;
+		vOutput = gestion.altaVehiculo(u7cVehiculo, u7cContribuyente);
+		assertTrue(vOutput == (null));	
+	}
+	
+
+	/**
+	 * u8.a Vehículo “2020AAA para el usuario con DNI 72345121A” intenta darse de baja -> se da de baja correctamente 
+	 */
+	@Test
+	public void u8a(){
+		when(vehiculos.eliminaVehiculo(u8aVehiculo.getMatricula())).thenReturn(u8aVehiculo); 
+		when(contribuyentes.actualizaContribuyente(u8aContribuyente)).thenReturn(u8aContribuyente);
+
+		
+		Vehiculo vOutput;
+		vOutput = gestion.bajaVehiculo(u8aVehiculo.getMatricula(), u8aContribuyente);
+		assertTrue(vOutput.equals(u8aVehiculo));
+	}
+
+	/**
+	 * u8.b Vehículo “2220AAA para el usuario con DNI 72345121A” intenta darse de baja -> se da un error porque no existe el vehículo 
+	 */
+	@Test
+	public void u8b(){
+		when(vehiculos.eliminaVehiculo(u8bVehiculo.getMatricula())).thenReturn(null); 
+		when(contribuyentes.actualizaContribuyente(u8aContribuyente)).thenReturn(u8aContribuyente);
+		
+		
+		Vehiculo vOutput;
+		vOutput = gestion.bajaVehiculo(u8bVehiculo.getMatricula(), u8bContribuyente);
+		assertTrue(vOutput == (null));	
+	}
+
+	/**
+	 * u8.c Vehículo “2020AAA para el usuario con DNI 72215121A” intenta darse de baja -> se da un error porque no existe el contribuyente
+	 */
+	@Test
+	public void u8c(){
+		when(vehiculos.eliminaVehiculo(u8cVehiculo.getMatricula())).thenReturn(u8cVehiculo); 
+		when(contribuyentes.actualizaContribuyente(u8cContribuyente)).thenReturn(null);
+		
+		Vehiculo vOutput;
+		vOutput = gestion.bajaVehiculo(u8cVehiculo.getMatricula(), u8cContribuyente);
+		assertTrue(vOutput == (null));	
+	}
+
+	/**
+	 * u8.d Vehículo “1237HDT para el usuario con DNI 78493121S” intenta darse de baja -> se da un error porque el vehículo no pertenece al contribuyente 
+	 */
+	@Test
+	public void u8d(){
+		when(vehiculos.eliminaVehiculo(u8dVehiculo.getMatricula())).thenReturn(u8dVehiculo); 
+		when(contribuyentes.actualizaContribuyente(u8dContribuyente)).thenReturn(u8dContribuyente);
+		
+		
+		Vehiculo vOutput;
+		vOutput = gestion.bajaVehiculo(u8dVehiculo.getMatricula(), u8dContribuyente);
+		assertTrue(vOutput == (null));	
+	}
+
+	/**
+	 * U9.a Vehículo “9424BGD” intenta consultarse -> el sistema muestra los datos correctamente porque el vehículo existe
+	 */
+	@Test
+	public void u9a(){
+		when(vehiculos.vehiculo(u9aVehiculo.getMatricula())).thenReturn(u9aVehiculo); 
+		
+		
+		Vehiculo vOutput;
+		vOutput = gestion.vehiculo(u9aVehiculo.getMatricula());
+		assertTrue(vOutput.equals(u9aVehiculo));	
+	}
+
+
+	/**
+	 * U9.b Vehículo “9424GGD” intenta consultarse -> se da un error porque el vehículo no existe
+	 */
+	@Test
+	public void u9b(){
+		when(vehiculos.vehiculo(u9bVehiculo.getMatricula())).thenReturn(null); 
+		
+		
+		Vehiculo vOutput;
+		vOutput = gestion.vehiculo(u9bVehiculo.getMatricula());
+		assertTrue(vOutput == null);	
+	}
 }

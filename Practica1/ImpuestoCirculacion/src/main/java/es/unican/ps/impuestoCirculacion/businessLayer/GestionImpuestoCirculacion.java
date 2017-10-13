@@ -10,10 +10,10 @@ import es.unican.ps.impuestoCirculacion.domain.Vehiculo;
 
 
 public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGestionVehiculos, ILifecycle {
-	
+
 	private IContribuyentesDAO contribuyentes;
 	private IVehiculosDAO vehiculos;
-	
+
 	public GestionImpuestoCirculacion(IContribuyentesDAO contribuyentes, IVehiculosDAO vehiculos) {
 		this.contribuyentes = contribuyentes;
 		this.vehiculos = vehiculos;
@@ -25,9 +25,9 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	 * @return El contribuyente a�adido
 	 * 		   null si no se a�ade porque ya existe
 	 */
-	
+
 	public Contribuyente altaContribuyente(Contribuyente c) {
-		return contribuyentes.creaContribuyente(c);
+		return contribuyentes.nuevoContribuyente(c);
 	}
 
 	/**
@@ -38,11 +38,11 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	 * 		   null si no se elimina porque no se encuentra o tiene
 	 * 				veh�culos a su nombre
 	 */
-	
+
 	public Contribuyente bajaContribuyente(String dni) {
 		return contribuyentes.eliminaContribuyente(dni);
 	}
-	
+
 	/**
 	 * Retorna el total de impuesto a pagar por un contribuyente
 	 * debido a los veh�culos que tiene a su nombre
@@ -50,16 +50,18 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	 * @return El valor a pagar en euros
 	 * 			Un valor negativo si el contribuyente no se encuentra
 	 */
-	
+
 	public double totalContribuyente(String dni) {
 
-		double result = 1.0;
-		Contribuyente c = contribuyentes.contribuyente(dni);
-		
+		double result = 0.0;
+		Contribuyente c = contribuyentes.datosContribuyente(dni);
+
 		if (c!=null) {
 			for (Vehiculo v:c.getListaVehiculos()) {
 				result += v.calculaPrecio();
 			}
+		}else{
+			return -1.0;
 		}
 		return result;
 	}
@@ -70,43 +72,56 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	 * @return El contribuyente cuyo dni coincide con el par�metro
 	 * 			null en caso de que no se encuentre
 	 */
-	
+
 	public Contribuyente contribuyente(String dni) {
 		return contribuyentes.datosContribuyente(dni);
 	}
 
-	
+
 	public Vehiculo altaVehiculo(Vehiculo v, Contribuyente c) {
+		Contribuyente cont = contribuyentes.datosContribuyente(c.getDni());
+		if(cont == null)
+			return null;
+		
+		Vehiculo veh =vehiculos.vehiculo(v.getMatricula());
+		if(veh != null)
+			return null;
+		
 		c.getListaVehiculos().add(v);
+		
 		contribuyentes.actualizaContribuyente(c);
 		return vehiculos.creaVehiculo(v);
-		
+
 	}
 
-	
+
 	public Vehiculo bajaVehiculo(String matricula, Contribuyente c) {
 		for (Vehiculo v:c.getListaVehiculos()) {
 			if (v.getMatricula().equals(matricula)) {
 				c.getListaVehiculos().remove(v);
-				vehiculos.eliminaVehiculo(matricula);
-				contribuyentes.actualizaContribuyente(c);
+				Vehiculo veh = vehiculos.eliminaVehiculo(matricula);
+				if(veh == null)
+					return null;
+				Contribuyente cont = contribuyentes.actualizaContribuyente(c);
+				if(cont == null)
+					return null;
 				return v;
 			}
 		}
 		return null;
 	}
 
-	
+
 	public Vehiculo vehiculo(String matricula) {
 		return vehiculos.vehiculo(matricula);
 	}
 
 
-	
+
 	public void finaliza() {
 		contribuyentes.finaliza();
 		vehiculos.finaliza();
 	}	
-	
+
 }
 
