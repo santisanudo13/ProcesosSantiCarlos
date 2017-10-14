@@ -1,6 +1,8 @@
 package es.unican.ps.impuestoCirculacion.businessLayer;
 
 
+import java.util.List;
+
 import es.unican.ps.common.ILifecycle;
 import es.unican.ps.impuestoCirculacion.daoLayer.IContribuyentesDAO;
 import es.unican.ps.impuestoCirculacion.daoLayer.IVehiculosDAO;
@@ -129,6 +131,19 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 		return null;
 		return contribuyentes.actualizaContribuyente(c);
 	}	
-
+	
+	public List<Contribuyente>contribuyentes(){
+		return contribuyentes.contribuyentes();
+	}
+	
+	public Vehiculo actualizaVehiculo(Vehiculo v) {
+		Vehiculo veh = vehiculos.vehiculo(v.getMatricula());
+		if(veh==null)
+		return null;
+		return vehiculos.actualizaVehiculo(v);
+	}
+	public List<Vehiculo>vehiculos(){
+		return vehiculos.vehiculos();
+	}
 }
 
