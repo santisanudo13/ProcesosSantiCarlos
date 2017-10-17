@@ -23,7 +23,7 @@ import es.unican.ps.impuestoCirculacion.domain.Motocicleta;
 import es.unican.ps.impuestoCirculacion.domain.Turismo;
 import es.unican.ps.impuestoCirculacion.domain.Vehiculo;
 
-public class PruebasUnitariasMetodos {
+public class PruebasUnitariasMetodoTest {
 
 	private static IContribuyentesDAO contribuyentes = mock(IContribuyentesDAO.class);
 	private static IVehiculosDAO vehiculos = mock(IVehiculosDAO.class);

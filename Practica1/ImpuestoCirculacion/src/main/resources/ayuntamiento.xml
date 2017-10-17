@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ayuntamiento xmlns="http://www.example.org/ss/impuestoCirculacion">
-	<contribuyente Nombre="Víctor" Apellido1="Gómez"
+	<contribuyente Nombre="Victor" Apellido1="Gomez"
 		Apellido2="Cobo" dni="72189333S">
 		<turismo potencia="9.0" matricula="6541HHB"
 			Fecha1Matriculacion="2012-12-01+01:00" />

@@ -29,7 +29,12 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	 */
 
 	public Contribuyente altaContribuyente(Contribuyente c) {
-		return contribuyentes.nuevoContribuyente(c);
+		if(contribuyentes.datosContribuyente(c.getDni()) != null){
+			return null;
+		}else{
+			return contribuyentes.nuevoContribuyente(c);
+
+		}
 	}
 
 	/**
@@ -42,7 +47,13 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	 */
 
 	public Contribuyente bajaContribuyente(String dni) {
-		return contribuyentes.eliminaContribuyente(dni);
+		if(contribuyentes.datosContribuyente(dni) == null)
+			return null;
+		if(!contribuyentes.datosContribuyente(dni).getListaVehiculos().isEmpty()){
+			return null;
+		}else{
+			return contribuyentes.eliminaContribuyente(dni);
+		}
 	}
 
 	/**
@@ -84,13 +95,13 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 		Contribuyente cont = contribuyentes.datosContribuyente(c.getDni());
 		if(cont == null)
 			return null;
-		
+
 		Vehiculo veh =vehiculos.vehiculo(v.getMatricula());
 		if(veh != null)
 			return null;
-		
+
 		c.getListaVehiculos().add(v);
-		
+
 		contribuyentes.actualizaContribuyente(c);
 		return vehiculos.creaVehiculo(v);
 
@@ -128,18 +139,18 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	public Contribuyente actualizaContribuyente(Contribuyente c) {
 		Contribuyente cont = contribuyentes.datosContribuyente(c.getDni());
 		if(cont==null)
-		return null;
+			return null;
 		return contribuyentes.actualizaContribuyente(c);
 	}	
-	
+
 	public List<Contribuyente>contribuyentes(){
 		return contribuyentes.contribuyentes();
 	}
-	
+
 	public Vehiculo actualizaVehiculo(Vehiculo v) {
 		Vehiculo veh = vehiculos.vehiculo(v.getMatricula());
 		if(veh==null)
-		return null;
+			return null;
 		return vehiculos.actualizaVehiculo(v);
 	}
 	public List<Vehiculo>vehiculos(){
