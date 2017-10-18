@@ -1,7 +1,7 @@
 //
-// Este archivo ha sido generado por la arquitectura JavaTM para la implantaci�n de la referencia de enlace (JAXB) XML v2.2.8-b130911.1802 
+// Este archivo ha sido generado por la arquitectura JavaTM para la implantaciÔøΩn de la referencia de enlace (JAXB) XML v2.2.8-b130911.1802 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas las modificaciones realizadas en este archivo se perder�n si se vuelve a compilar el esquema de origen. 
+// Todas las modificaciones realizadas en este archivo se perderÔøΩn si se vuelve a compilar el esquema de origen. 
 // Generado el: 2014.10.08 a las 09:44:31 AM CEST 
 //
 
@@ -84,13 +84,11 @@ public class Ayuntamiento {
 	public static void flush(Ayuntamiento ayun) {
 		try {
 			JAXBContext jaxbctx = JAXBContext.newInstance(ObjectFactory.class);
-			// Volcar la ifnoramci�n a un fichero
+			// Volcar la ifnoramciÛn a un fichero
 			Marshaller marshaller = jaxbctx.createMarshaller();
-			
-			File xml = new File("src/main/resources/ayuntamiento.xml");
-			marshaller.marshal(ayun, xml);
+			marshaller.marshal(ayun, new File("src/main/resources/ayuntamiento.xml"));
 		} catch (JAXBException e) {
-			System.out.println("No se puede volcar la informaci�n al fichero");
+			System.out.println("No se puede volcar la informaciÛn al fichero");
 			System.exit(0);
 		}
 	}
@@ -103,8 +101,8 @@ public class Ayuntamiento {
 			javax.xml.bind.Unmarshaller unmarshaller = jaxbctx
 					.createUnmarshaller();
 
-			File xml = new File("src/main/resources/ayuntamiento.xml");
-			return (Ayuntamiento) unmarshaller.unmarshal(xml);
+			return (Ayuntamiento) unmarshaller.unmarshal(new File(
+					"src/main/resources/ayuntamiento.xml"));
 
 		} catch (JAXBException j) {
 			System.out.println("Error del JAXB");

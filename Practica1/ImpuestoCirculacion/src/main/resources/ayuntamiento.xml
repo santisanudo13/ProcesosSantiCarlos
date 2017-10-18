@@ -14,13 +14,6 @@
 		<turismo potencia="13.0" matricula="6462DTF"
 			Fecha1Matriculacion="2012-11-12+01:00" />
 	</contribuyente>
-	<contribuyente Nombre="Alba" Apellido1="Muñiz" Apellido2="Revuelta"
-		dni="72345121A">
-		<turismo potencia="11.0" matricula="3441DDB"
-			Fecha1Matriculacion="2009-01-01+01:00" />
-		<motocicleta cilindrada="1200" matricula="1232HHT"
-			Fecha1Matriculacion="2012-11-12+01:00" />
-	</contribuyente>
 	<contribuyente Nombre="Pepito" Apellido1="Grillo"
 		Apellido2="Saltamontes" dni="71345631P">
 		<turismo potencia="22.0" matricula="3247BBD"
@@ -39,13 +32,6 @@
 		<turismo potencia="19.0" matricula="4893DBD"
 			Fecha1Matriculacion="2011-01-01+01:00" />
 	</contribuyente>
-	<contribuyente Nombre="Amador" Apellido1="Rivas"
-		Apellido2="Cobo" dni="78934831M">
-		<turismo potencia="17.0" matricula="9424BGD"
-			Fecha1Matriculacion="2004-12-01+01:00" />
-		<motocicleta cilindrada="600" matricula="1687HGD"
-			Fecha1Matriculacion="2011-05-12+02:00" />
-	</contribuyente>
 	<contribuyente Nombre="Jorge" Apellido1="Marquez"
 		Apellido2="Pedrosa" dni="73951831H">
 		<motocicleta cilindrada="120" matricula="1237HTD"
@@ -60,4 +46,19 @@
 		<motocicleta cilindrada="200" matricula="1707BBG"
 			Fecha1Matriculacion="2003-07-06+02:00" />
 	</contribuyente>
+	<contribuyente Nombre="Juan" Apellido1="Lopez" Apellido2="Cobo"
+		dni="72081145Z" />
+	<contribuyente Nombre="Lidia" Apellido1="Lopez"
+		Apellido2="Revuelta" dni="72345121A" />
+	<contribuyente Nombre="Amador" Apellido1="Lopez"
+		Apellido2="Cobo" dni="78934831M">
+		<motocicleta cilindrada="600" matricula="1687HGD"
+			Fecha1Matriculacion="2017-10-18+02:00" />
+		<turismo potencia="20.0" matricula="9424BGD"
+			Fecha1Matriculacion="2017-10-18+02:00" />
+	</contribuyente>
+	<contribuyente Nombre="Victor" Apellido1="Gomez"
+		Apellido2="Cobo" dni="71345631L" />
+	<contribuyente Nombre="Victor" Apellido1="Gomez"
+		Apellido2="Cobo" dni="71345631Y" />
 </ayuntamiento>

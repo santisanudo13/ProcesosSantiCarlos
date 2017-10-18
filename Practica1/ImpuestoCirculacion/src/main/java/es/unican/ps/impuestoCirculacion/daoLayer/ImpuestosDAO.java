@@ -111,7 +111,6 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 
 	public void finaliza() {
 		Ayuntamiento.flush(ayun);
-
 	}
 
 

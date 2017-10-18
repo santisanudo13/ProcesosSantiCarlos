@@ -1,22 +1,15 @@
 package Testing;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import es.unican.ps.impuestoCirculacion.businessLayer.GestionImpuestoCirculacion;
-import es.unican.ps.impuestoCirculacion.daoLayer.IContribuyentesDAO;
-import es.unican.ps.impuestoCirculacion.daoLayer.IVehiculosDAO;
 import es.unican.ps.impuestoCirculacion.daoLayer.ImpuestosDAO;
 import es.unican.ps.impuestoCirculacion.domain.Contribuyente;
 import es.unican.ps.impuestoCirculacion.domain.Motocicleta;
@@ -25,9 +18,8 @@ import es.unican.ps.impuestoCirculacion.domain.Vehiculo;
 
 public class IntegracionTest {
 
-	private static ImpuestosDAO contribuyentes = new ImpuestosDAO();
-	private static ImpuestosDAO vehiculos = new ImpuestosDAO();
-	private static GestionImpuestoCirculacion gestion = new GestionImpuestoCirculacion(contribuyentes, vehiculos);
+	private static ImpuestosDAO datos = new ImpuestosDAO();
+	private static GestionImpuestoCirculacion gestion = new GestionImpuestoCirculacion(datos, datos);
 
 
 	private static Contribuyente i3aContribuyente, i3bContribuyente, i4aContribuyente, i4bContribuyente,i4cContribuyente,

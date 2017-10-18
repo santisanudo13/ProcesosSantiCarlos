@@ -32,7 +32,9 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 		if(contribuyentes.datosContribuyente(c.getDni()) != null){
 			return null;
 		}else{
-			return contribuyentes.nuevoContribuyente(c);
+			Contribuyente cont = contribuyentes.nuevoContribuyente(c);
+			finaliza();
+			return cont;
 
 		}
 	}
@@ -52,7 +54,9 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 		if(!contribuyentes.datosContribuyente(dni).getListaVehiculos().isEmpty()){
 			return null;
 		}else{
-			return contribuyentes.eliminaContribuyente(dni);
+			Contribuyente cont = contribuyentes.eliminaContribuyente(dni);
+			finaliza();
+			return cont;
 		}
 	}
 
@@ -101,14 +105,26 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 			return null;
 
 		c.getListaVehiculos().add(v);
-
 		contribuyentes.actualizaContribuyente(c);
-		return vehiculos.creaVehiculo(v);
+		Vehiculo vehiculo = vehiculos.creaVehiculo(v);
+		
+		finaliza();
+		return vehiculo;
 
 	}
 
 
 	public Vehiculo bajaVehiculo(String matricula, Contribuyente c) {
+		
+		Contribuyente contribuyente = contribuyentes.datosContribuyente(c.getDni());
+		if(contribuyente == null)
+			return null;
+		Vehiculo vehiculo = vehiculos.vehiculo(matricula);
+		if(vehiculo == null)
+			return null;
+		
+		
+		
 		for (Vehiculo v:c.getListaVehiculos()) {
 			if (v.getMatricula().equals(matricula)) {
 				c.getListaVehiculos().remove(v);
@@ -118,6 +134,8 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 				Contribuyente cont = contribuyentes.actualizaContribuyente(c);
 				if(cont == null)
 					return null;
+				
+				finaliza();
 				return v;
 			}
 		}
@@ -140,6 +158,7 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 		Contribuyente cont = contribuyentes.datosContribuyente(c.getDni());
 		if(cont==null)
 			return null;
+		finaliza();
 		return contribuyentes.actualizaContribuyente(c);
 	}	
 
@@ -151,6 +170,7 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 		Vehiculo veh = vehiculos.vehiculo(v.getMatricula());
 		if(veh==null)
 			return null;
+		finaliza();
 		return vehiculos.actualizaVehiculo(v);
 	}
 	public List<Vehiculo>vehiculos(){
