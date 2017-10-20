@@ -55,8 +55,9 @@ public class AceptacionYSistemaTest {
 	@Test
 	public void u2b(){
 		frame.textBox("dniContribuyente").enterText("78955831M").pressAndReleaseKey(KeyPressInfo.keyCode(KeyEvent.VK_ENTER));
-
+		frame.list("listVehiculos").requireItemCount(0);
 		frame.textBox("nombreContribuyente").requireText("DNI No Valido");
+		frame.textBox("totalContribuyente").requireText("");
 
 	}
 

@@ -7,7 +7,7 @@ import es.unican.ps.impuestoCirculacion.domain.Vehiculo;
 
 
 public interface IVehiculosDAO extends ILifecycle {
-	public Vehiculo creaVehiculo(Vehiculo v);
+	public Vehiculo creaVehiculo(Vehiculo v, String dni);
 	public Vehiculo eliminaVehiculo(String matricula);
 	public Vehiculo actualizaVehiculo(Vehiculo nuevo);
 	public Vehiculo vehiculo(String matricula);

@@ -8,7 +8,6 @@
 package es.unican.ps.impuestoCirculacion.domain;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +79,17 @@ public class Ayuntamiento {
 		}
 		return this.contribuyente;
 	}
+	
+	
+
+	/**
+	 * @param contribuyente the contribuyente to set
+	 */
+	public void setContribuyente(List<Contribuyente> contribuyente) {
+		this.contribuyente = contribuyente;
+	}
+
+
 
 	public static void flush(Ayuntamiento ayun) {
 		try {

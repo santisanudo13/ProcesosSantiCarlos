@@ -1,30 +1,24 @@
 package es.unican.ps.impuestoCirculacion.presentationLayer;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.DefaultListModel;
-import javax.swing.JTextField;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import es.unican.ps.impuestoCirculacion.businessLayer.IGestionContribuyentes;
 import es.unican.ps.impuestoCirculacion.businessLayer.IGestionVehiculos;
 import es.unican.ps.impuestoCirculacion.domain.Contribuyente;
 import es.unican.ps.impuestoCirculacion.domain.Vehiculo;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JList;
-
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
-import java.text.DecimalFormat;
 
 @SuppressWarnings("serial")
 public class VistaFuncionario extends JFrame {
@@ -49,7 +43,6 @@ public class VistaFuncionario extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				finaliza();
 			}
 		});
 		

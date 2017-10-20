@@ -2,40 +2,76 @@ package Testing;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import es.unican.ps.impuestoCirculacion.businessLayer.GestionImpuestoCirculacion;
 import es.unican.ps.impuestoCirculacion.daoLayer.ImpuestosDAO;
+import es.unican.ps.impuestoCirculacion.domain.Ayuntamiento;
 import es.unican.ps.impuestoCirculacion.domain.Contribuyente;
 import es.unican.ps.impuestoCirculacion.domain.Motocicleta;
+import es.unican.ps.impuestoCirculacion.domain.ObjectFactory;
 import es.unican.ps.impuestoCirculacion.domain.Turismo;
 import es.unican.ps.impuestoCirculacion.domain.Vehiculo;
 
+@SuppressWarnings("restriction")
 public class IntegracionTest {
+
+
 
 	private static ImpuestosDAO datos = new ImpuestosDAO();
 	private static GestionImpuestoCirculacion gestion = new GestionImpuestoCirculacion(datos, datos);
 
 
 	private static Contribuyente i3aContribuyente, i3bContribuyente, i4aContribuyente, i4bContribuyente,i4cContribuyente,
-	i7aContribuyente, i7bContribuyente,i7cContribuyente, i8aContribuyente, i8bContribuyente,i8cContribuyente, i8dContribuyente, 
-	i5aContribuyente, i5bContribuyente, i6aContribuyente, i6bContribuyente, i6cContribuyente, i10aContribuyente, i10bContribuyente,
+	i7aContribuyente, i7bContribuyente,i7cContribuyente, i8aContribuyente, i5aContribuyente, i5bContribuyente, i6aContribuyente, i6bContribuyente, i6cContribuyente,i9aContribuyente, i10aContribuyente, i10bContribuyente,
 	i11bContribuyente,i11c1Contribuyente, i11c2Contribuyente, i11c3Contribuyente, i12aContribuyente, i12bContribuyente;
 	private static Vehiculo i7aVehiculo, i7bVehiculo, i7cVehiculo, i8aVehiculo, i8bVehiculo, i8cVehiculo, i8dVehiculo, i9aVehiculo,
 	i9bVehiculo, i12aVehiculo, i12bVehiculo, i13bVehiculo, i13c1Vehiculo, i13c2Vehiculo, i13c3Vehiculo;
 
-	private static List<Contribuyente> i11aContribuyentes, i11bContribuyentes, i11cContribuyentes;
-	private static List<Vehiculo> i13aVehiculos, i13bVehiculos, i13cVehiculos;
+	private static List<Contribuyente> i11bContribuyentes, i11cContribuyentes;
+	private static List<Vehiculo> i13bVehiculos, i13cVehiculos;
 
+	@AfterClass
+	public static void end(){
+		while(!datos.contribuyentes().isEmpty()){
+			Contribuyente cont = datos.contribuyentes().get(0);
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+		}
+
+
+		Ayuntamiento ayun = readBackUpXML();
+		overwriteXML(ayun);
+		File f = new File("src/main/resources/ayuntamientoBackUp.xml");
+		f.delete();
+	}
 
 	@SuppressWarnings("deprecation")
 	@BeforeClass
 	public static void init(){
+		//Guardamos BackUp
+		List<Contribuyente> l = gestion.contribuyentes();
+		Ayuntamiento ayuntamiento = new Ayuntamiento();
+		ayuntamiento.setContribuyente(l);
+		
+		writeBackUpXML(ayuntamiento);
+		
+		
+
 
 		//		Contribuyentes
 		i3aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72081145Z");
@@ -72,7 +108,7 @@ public class IntegracionTest {
 		i8cVehiculo = new Turismo("2020AAA", new Date(), 20);
 		i8dVehiculo = new Turismo("2220AAX", new Date(), 20);
 
-		i9aVehiculo = new Turismo("9424BGD", new Date(), 17);
+		i9aVehiculo = new Turismo("1234XXX", new Date(), 500);
 		i9bVehiculo = new Turismo("9424GGD", new Date(), 20);
 
 		i12aVehiculo = new Turismo("9424BGD", new Date(2014, 05, 05), 20);
@@ -85,10 +121,11 @@ public class IntegracionTest {
 
 		List<Vehiculo> listi8 = new ArrayList<Vehiculo>();
 		listi8.add(i8aVehiculo);
+		i9aContribuyente = new Contribuyente(listi8, "Carlos", "Diaz", "manjon", "33344455A");
 		i8aContribuyente = new Contribuyente(listi8, "Lidia", "Lopez", "Revuelta", "72345121A");
-		i8bContribuyente = new Contribuyente(listi8, "Lidia", "Lopez", "Revuelta", "72345121A");
-		i8cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121X");
-		i8dContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121X");
+		new Contribuyente(listi8, "Lidia", "Lopez", "Revuelta", "72345121A");
+		new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121X");
+		new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121X");
 
 		List<Vehiculo> listi10a = new ArrayList<Vehiculo>();
 		listi10a.add(new Turismo("9424BGD", new Date(), 17));
@@ -100,15 +137,14 @@ public class IntegracionTest {
 		i11c1Contribuyente =  new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Lopez", "78935831M");
 		i11c2Contribuyente =  new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Lopez", "78935831M");
 		i11c3Contribuyente =  new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Lopez", "78935831M");
-		
-		
+
+
 		i12aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "71345631L");
 		i12bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "71345631Y");
 
 
 
-		//Lista de contribuyentes vacía, con 1 y con varios
-		i11aContribuyentes = new ArrayList<Contribuyente>();
+		new ArrayList<Contribuyente>();
 		i11bContribuyentes = new ArrayList<Contribuyente>();
 		i11bContribuyentes.add(i11bContribuyente);
 		i11cContribuyentes = new ArrayList<Contribuyente>();
@@ -116,8 +152,7 @@ public class IntegracionTest {
 		i11cContribuyentes.add(i11c2Contribuyente);
 		i11cContribuyentes.add(i11c3Contribuyente);
 
-		//Lista de vehiculos vacía, con 1 y con varios
-		i13aVehiculos = new ArrayList<Vehiculo>();
+		new ArrayList<Vehiculo>();
 		i13bVehiculos = new ArrayList<Vehiculo>();
 		i13bVehiculos.add(i13bVehiculo);
 		i13cVehiculos = new ArrayList<Vehiculo>();
@@ -131,8 +166,16 @@ public class IntegracionTest {
 	 */
 	@Test
 	public void i3a(){
-		gestion.bajaContribuyente(i3aContribuyente.getDni());
-		
+		Contribuyente cont = gestion.contribuyente(i3aContribuyente.getDni());
+		if(cont != null){
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+
+		}
+
 		Contribuyente cOutput;
 		cOutput = gestion.altaContribuyente(i3aContribuyente);
 		assertTrue(cOutput.equals(i3aContribuyente));
@@ -146,7 +189,7 @@ public class IntegracionTest {
 	public void i3b(){
 
 		gestion.altaContribuyente(i3bContribuyente);
-		
+
 		Contribuyente cOutput;
 		cOutput = gestion.altaContribuyente(i3bContribuyente);
 		assertTrue(cOutput == (null));
@@ -158,7 +201,7 @@ public class IntegracionTest {
 	@Test
 	public void i4a(){
 		gestion.altaContribuyente(i4aContribuyente);
-		
+
 		Contribuyente cOutput;
 		cOutput = gestion.bajaContribuyente(i4aContribuyente.getDni());
 		assertTrue(cOutput.getDni().equals(i4aContribuyente.getDni()));
@@ -169,9 +212,18 @@ public class IntegracionTest {
 	 */
 	@Test
 	public void i4b(){
-		gestion.bajaContribuyente(i4bContribuyente.getDni());
+		Contribuyente cont = gestion.contribuyente(i4bContribuyente.getDni());
+		if(cont != null){
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+
+		}
 		gestion.altaContribuyente(i4bContribuyente);
-		
+		gestion.altaVehiculo(new Turismo("1111AAA", new Date(), 111), i4bContribuyente);
+
 		Contribuyente cOutput;
 		cOutput = gestion.bajaContribuyente(i4bContribuyente.getDni());
 		assertTrue(cOutput == (null));
@@ -194,6 +246,16 @@ public class IntegracionTest {
 	 */
 	@Test
 	public void i5a(){
+		Contribuyente cont = gestion.contribuyente(i5aContribuyente.getDni());
+		if(cont != null){
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+
+		}
+		gestion.altaContribuyente(i5aContribuyente);
 
 		Contribuyente cOutput;
 		cOutput = gestion.contribuyente(i5aContribuyente.getDni());
@@ -259,8 +321,18 @@ public class IntegracionTest {
 	 */
 	@Test
 	public void i7a(){
+		Contribuyente cont = gestion.contribuyente(i7aContribuyente.getDni());
+		if(cont != null){
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
 
-		gestion.actualizaContribuyente(i7aContribuyente);
+		}
+		gestion.altaContribuyente(i7aContribuyente);
+
+
 		Vehiculo vOutput;
 		vOutput = gestion.altaVehiculo(i7aVehiculo, i7aContribuyente);
 		assertTrue(vOutput.equals(i7aVehiculo));
@@ -283,11 +355,20 @@ public class IntegracionTest {
 	 */
 	@Test
 	public void i7c(){
+		Contribuyente cont = gestion.contribuyente(i7cContribuyente.getDni());
+		if(cont != null){
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
 
+		}
 		gestion.altaContribuyente(i7cContribuyente);
 		gestion.altaVehiculo(i7cVehiculo, i7cContribuyente);
 
 		Vehiculo vOutput;
+
 		vOutput = gestion.altaVehiculo(i7cVehiculo, i7cContribuyente);
 		assertTrue(vOutput == (null));	
 	}
@@ -298,11 +379,20 @@ public class IntegracionTest {
 	 */
 	@Test
 	public void i8a(){
+		Contribuyente cont = gestion.contribuyente(i8aContribuyente.getDni());
+		if(cont != null){
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+
+		}
 		gestion.altaContribuyente(i8aContribuyente);
 		gestion.altaVehiculo(i8aVehiculo, i8aContribuyente);
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(i8aVehiculo.getMatricula(), i8aContribuyente);
+		vOutput = gestion.bajaVehiculo(i8aVehiculo.getMatricula());
 		assertTrue(vOutput.equals(i8aVehiculo));
 	}
 
@@ -315,7 +405,7 @@ public class IntegracionTest {
 
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(i8bVehiculo.getMatricula(), i8bContribuyente);
+		vOutput = gestion.bajaVehiculo(i8bVehiculo.getMatricula());
 		assertTrue(vOutput == (null));	
 	}
 
@@ -326,7 +416,7 @@ public class IntegracionTest {
 	public void i8c(){
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(i8cVehiculo.getMatricula(), i8cContribuyente);
+		vOutput = gestion.bajaVehiculo(i8cVehiculo.getMatricula());
 		assertTrue(vOutput == (null));	
 	}
 
@@ -338,7 +428,7 @@ public class IntegracionTest {
 
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(i8dVehiculo.getMatricula(), i8dContribuyente);
+		vOutput = gestion.bajaVehiculo(i8dVehiculo.getMatricula());
 		assertTrue(vOutput == (null));	
 	}
 
@@ -348,8 +438,19 @@ public class IntegracionTest {
 	@Test
 	public void i9a(){
 
+		Contribuyente cont = gestion.contribuyente(i9aContribuyente.getDni());
+		if(cont != null){
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
 
-		Vehiculo vOutput;
+		}
+		gestion.altaContribuyente(i9aContribuyente);
+		gestion.altaVehiculo(i9aVehiculo, i9aContribuyente);
+
+		Vehiculo vOutput = null;
 		vOutput = gestion.vehiculo(i9aVehiculo.getMatricula());
 		assertTrue(vOutput.equals(i9aVehiculo));	
 	}
@@ -395,7 +496,14 @@ con dicho DNI y no se actualiza nada.
 	 */
 	@Test
 	public void i11a(){
-
+		while(!datos.contribuyentes().isEmpty()){
+			Contribuyente cont = datos.contribuyentes().get(0);
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+		}
 
 		int vOutput;
 		vOutput = gestion.contribuyentes().size();
@@ -406,7 +514,15 @@ con dicho DNI y no se actualiza nada.
 	 */
 	@Test
 	public void i11b(){
-
+		while(!datos.contribuyentes().isEmpty()){
+			Contribuyente cont = datos.contribuyentes().get(0);
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+		}
+		gestion.altaContribuyente(i3aContribuyente);
 
 		int vOutput;
 		vOutput = gestion.contribuyentes().size();
@@ -417,6 +533,16 @@ con dicho DNI y no se actualiza nada.
 	 */
 	@Test
 	public void i11c(){
+		while(!datos.contribuyentes().isEmpty()){
+			Contribuyente cont = datos.contribuyentes().get(0);
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+		}
+		gestion.altaContribuyente(i3aContribuyente);
+		gestion.altaContribuyente(i3bContribuyente);
 
 
 		int vOutput;
@@ -444,7 +570,7 @@ con dicho DNI y no se actualiza nada.
 	@Test
 	public void i12b(){
 		gestion.altaContribuyente(i12bContribuyente);
-		gestion.bajaVehiculo( i12bVehiculo.getMatricula(), i12bContribuyente);
+		gestion.bajaVehiculo( i12bVehiculo.getMatricula());
 
 		i12bVehiculo.setFecha1Matriculacion(new Date());
 		Vehiculo vOutput;
@@ -456,7 +582,14 @@ con dicho DNI y no se actualiza nada.
 	 */
 	@Test
 	public void i13a(){
-
+		while(!datos.contribuyentes().isEmpty()){
+			Contribuyente cont = datos.contribuyentes().get(0);
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+		}
 
 		int vOutput;
 		vOutput = gestion.vehiculos().size();
@@ -467,7 +600,17 @@ con dicho DNI y no se actualiza nada.
 	 */
 	@Test
 	public void i13b(){
+		while(!datos.contribuyentes().isEmpty()){
+			Contribuyente cont = datos.contribuyentes().get(0);
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+		}
 
+		gestion.altaContribuyente(i3aContribuyente);
+		gestion.altaVehiculo(i7aVehiculo, i3aContribuyente);
 
 		int vOutput;
 		vOutput = gestion.vehiculos().size();
@@ -478,10 +621,64 @@ con dicho DNI y no se actualiza nada.
 	 */
 	@Test
 	public void i13c(){
+		while(!datos.contribuyentes().isEmpty()){
+			Contribuyente cont = datos.contribuyentes().get(0);
+			if(!cont.getListaVehiculos().isEmpty()){
+				while(!cont.getListaVehiculos().isEmpty())
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+			}
+			gestion.bajaContribuyente(cont.getDni());
+		}
+
+		gestion.altaContribuyente(i3aContribuyente);
+		gestion.altaVehiculo(i7aVehiculo, i3aContribuyente);
+		gestion.altaVehiculo(i7bVehiculo, i3aContribuyente);
 
 
 		int vOutput;
 		vOutput = gestion.vehiculos().size();
 		assertTrue(vOutput > 1);	
+	}
+	
+	private static void overwriteXML(Ayuntamiento ayun) {
+		try {
+			JAXBContext jaxbctx = JAXBContext.newInstance(ObjectFactory.class);
+			// Volcar la ifnoramciÃ›n a un fichero
+			Marshaller marshaller = jaxbctx.createMarshaller();
+			marshaller.marshal(ayun, new File("src/main/resources/ayuntamiento.xml"));
+		} catch (JAXBException e) {
+			System.out.println("No se puede volcar la informaciÃ›n al fichero");
+			System.exit(0);
+		}
+	}
+	
+	private static void writeBackUpXML(Ayuntamiento ayun) {
+		try {
+			JAXBContext jaxbctx = JAXBContext.newInstance(ObjectFactory.class);
+			// Volcar la ifnoramciÃ›n a un fichero
+			Marshaller marshaller = jaxbctx.createMarshaller();
+			marshaller.marshal(ayun, new File("src/main/resources/ayuntamientoBackUp.xml"));
+		} catch (JAXBException e) {
+			System.out.println("No se puede volcar la informaciÃ›n al fichero");
+			System.exit(0);
+		}
+	}
+
+	public static Ayuntamiento readBackUpXML() {
+		JAXBContext jaxbctx;
+		try {
+			jaxbctx = JAXBContext.newInstance(ObjectFactory.class);
+			// Procesamos el documento (Unmarshall)
+			javax.xml.bind.Unmarshaller unmarshaller = jaxbctx
+					.createUnmarshaller();
+
+			return (Ayuntamiento) unmarshaller.unmarshal(new File(
+					"src/main/resources/ayuntamientoBackUp.xml"));
+
+		} catch (JAXBException j) {
+			System.out.println("Error del JAXB");
+			System.out.println(j);
+		}
+		return null;
 	}
 }

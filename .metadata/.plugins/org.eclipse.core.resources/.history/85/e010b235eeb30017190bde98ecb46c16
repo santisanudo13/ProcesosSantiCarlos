@@ -1,0 +1,521 @@
+package Testing;
+
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import es.unican.ps.impuestoCirculacion.businessLayer.GestionImpuestoCirculacion;
+import es.unican.ps.impuestoCirculacion.daoLayer.ImpuestosDAO;
+import es.unican.ps.impuestoCirculacion.domain.Contribuyente;
+import es.unican.ps.impuestoCirculacion.domain.Motocicleta;
+import es.unican.ps.impuestoCirculacion.domain.Turismo;
+import es.unican.ps.impuestoCirculacion.domain.Vehiculo;
+
+public class IntegracionTest {
+
+	private static ImpuestosDAO datos = new ImpuestosDAO();
+	private static GestionImpuestoCirculacion gestion = new GestionImpuestoCirculacion(datos, datos);
+
+
+	private static Contribuyente i3aContribuyente, i3bContribuyente, i4aContribuyente, i4bContribuyente,i4cContribuyente,
+	i7aContribuyente, i7bContribuyente,i7cContribuyente, i8aContribuyente, i8bContribuyente,i8cContribuyente, i8dContribuyente, 
+	i5aContribuyente, i5bContribuyente, i6aContribuyente, i6bContribuyente, i6cContribuyente, i10aContribuyente, i10bContribuyente,
+	i11bContribuyente,i11c1Contribuyente, i11c2Contribuyente, i11c3Contribuyente, i12aContribuyente, i12bContribuyente;
+	private static Vehiculo i7aVehiculo, i7bVehiculo, i7cVehiculo, i8aVehiculo, i8bVehiculo, i8cVehiculo, i8dVehiculo, i9aVehiculo,
+	i9bVehiculo, i12aVehiculo, i12bVehiculo, i13bVehiculo, i13c1Vehiculo, i13c2Vehiculo, i13c3Vehiculo;
+
+	private static List<Contribuyente> i11aContribuyentes, i11bContribuyentes, i11cContribuyentes;
+	private static List<Vehiculo> i13aVehiculos, i13bVehiculos, i13cVehiculos;
+
+
+	@SuppressWarnings("deprecation")
+	@BeforeClass
+	public static void init(){
+
+		//		Contribuyentes
+		i3aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72081145Z");
+		i3bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72189333S");
+
+		i4aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72081145Z");
+		i4bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72189333S");
+		i4cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72177733S");
+
+		List<Vehiculo> listi5a = new ArrayList<Vehiculo>();
+		listi5a.add(new Turismo("9424BGD", new Date(), 17));
+		listi5a.add(new Motocicleta(600, "1687HGD", new Date()));
+		i5aContribuyente = new Contribuyente(listi5a, "Amador", "Rivas", "Cobo", "78934831M");
+		i5bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72189333A");
+
+		List<Vehiculo> list = new ArrayList<Vehiculo>();
+		list.add(new Turismo("3456HDP", new Date(), 17));
+		list.add(new Motocicleta(700, "1234BBB", new Date()));
+		i6aContribuyente = new Contribuyente(list, "Lidia", "Lopez", "Revuelta", "78934831M");
+		i6bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "78934835M");
+		i6cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Juan", "Lopez", "Cobo", "72081145Z");
+
+		i7aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Lidia", "Lopez", "Revuelta", "72345121A");
+		i7bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72355121A");
+		i7cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "71345631P");
+
+		//		Vehiculos
+		i7aVehiculo = new Turismo("2020AAA", new Date(2003, 10, 10), 20);
+		i7bVehiculo = new Turismo("2021AAA", new Date(2003, 10, 10), 20);
+		i7cVehiculo = new Turismo("2020AAA", new Date(2003, 10, 10), 20);
+
+		i8aVehiculo = new Turismo("2020AAA", new Date(), 20);
+		i8bVehiculo = new Turismo("2220AAX", new Date(), 20);
+		i8cVehiculo = new Turismo("2020AAA", new Date(), 20);
+		i8dVehiculo = new Turismo("2220AAX", new Date(), 20);
+
+		i9aVehiculo = new Turismo("9424BGD", new Date(), 17);
+		i9bVehiculo = new Turismo("9424GGD", new Date(), 20);
+
+		i12aVehiculo = new Turismo("9424BGD", new Date(2014, 05, 05), 20);
+		i12bVehiculo = new Turismo("9424GGD", new Date(2011, 05, 05), 20);
+
+		i13bVehiculo = new Turismo("1237HDT", new Date(), 20);
+		i13c1Vehiculo = new Turismo("1237HDT", new Date(), 20);
+		i13c2Vehiculo = new Turismo("1237HDT", new Date(), 20);
+		i13c3Vehiculo = new Turismo("1237HDT", new Date(), 20);
+
+		List<Vehiculo> listi8 = new ArrayList<Vehiculo>();
+		listi8.add(i8aVehiculo);
+		i8aContribuyente = new Contribuyente(listi8, "Lidia", "Lopez", "Revuelta", "72345121A");
+		i8bContribuyente = new Contribuyente(listi8, "Lidia", "Lopez", "Revuelta", "72345121A");
+		i8cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121X");
+		i8dContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121X");
+
+		List<Vehiculo> listi10a = new ArrayList<Vehiculo>();
+		listi10a.add(new Turismo("9424BGD", new Date(), 17));
+		listi10a.add(new Motocicleta(600, "1687HGD", new Date()));
+		i10aContribuyente = new Contribuyente(listi10a, "Amador", "Lopez", "Cobo", "78934831M");
+		i10bContribuyente =  new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Lopez", "78935831X");
+
+		i11bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Lopez", "78934831M");
+		i11c1Contribuyente =  new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Lopez", "78935831M");
+		i11c2Contribuyente =  new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Lopez", "78935831M");
+		i11c3Contribuyente =  new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Lopez", "78935831M");
+
+
+		i12aContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "71345631L");
+		i12bContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "71345631Y");
+
+
+
+		//Lista de contribuyentes vacía, con 1 y con varios
+		i11aContribuyentes = new ArrayList<Contribuyente>();
+		i11bContribuyentes = new ArrayList<Contribuyente>();
+		i11bContribuyentes.add(i11bContribuyente);
+		i11cContribuyentes = new ArrayList<Contribuyente>();
+		i11cContribuyentes.add(i11c1Contribuyente);
+		i11cContribuyentes.add(i11c2Contribuyente);
+		i11cContribuyentes.add(i11c3Contribuyente);
+
+		//Lista de vehiculos vacía, con 1 y con varios
+		i13aVehiculos = new ArrayList<Vehiculo>();
+		i13bVehiculos = new ArrayList<Vehiculo>();
+		i13bVehiculos.add(i13bVehiculo);
+		i13cVehiculos = new ArrayList<Vehiculo>();
+		i13cVehiculos.add(i13c1Vehiculo);
+		i13cVehiculos.add(i13c2Vehiculo);
+		i13cVehiculos.add(i13c3Vehiculo);
+	}
+
+	/**
+	 * i3.a Contribuyente â€œLidia LÃ³pez Revuelta 72081145Zâ€� intenta darse de alta -> se da de alta correctamente
+	 */
+	@Test
+	public void i3a(){
+		gestion.bajaContribuyente(i3aContribuyente.getDni());
+
+		Contribuyente cOutput;
+		cOutput = gestion.altaContribuyente(i3aContribuyente);
+		assertTrue(cOutput.equals(i3aContribuyente));
+
+	}
+
+	/**
+	 * i3.b Contribuyente â€œVÃ­ctor GÃ³mez Cobo 72189333Sâ€� intenta darse de alta -> se da un error porque ya existe 
+	 */
+	@Test
+	public void i3b(){
+
+		gestion.altaContribuyente(i3bContribuyente);
+
+		Contribuyente cOutput;
+		cOutput = gestion.altaContribuyente(i3bContribuyente);
+		assertTrue(cOutput == (null));
+	}
+
+	/**
+	 * i4.a Contribuyente â€œ72081145Zâ€� intenta darse de baja -> se da de baja correctamente  
+	 */
+	@Test
+	public void i4a(){
+		gestion.altaContribuyente(i4aContribuyente);
+
+		Contribuyente cOutput;
+		cOutput = gestion.bajaContribuyente(i4aContribuyente.getDni());
+		assertTrue(cOutput.getDni().equals(i4aContribuyente.getDni()));
+	}
+
+	/**
+	 * i4.b Contribuyente â€œ72189333Sâ€� intenta darse de baja -> se da un error porque tiene vehÃ­culos asociados 
+	 */
+	@Test
+	public void i4b(){
+		gestion.bajaContribuyente(i4bContribuyente.getDni());
+		gestion.altaContribuyente(i4bContribuyente);
+
+		Contribuyente cOutput;
+		cOutput = gestion.bajaContribuyente(i4bContribuyente.getDni());
+		assertTrue(cOutput == (null));
+	}
+
+	/**
+	 * i4.c Contribuyente â€œ72177733Sâ€� intenta darse de baja -> se da un error porque no existe  AS3
+	 */
+	@Test
+	public void i4c(){
+		Contribuyente cOutput;
+		cOutput = gestion.bajaContribuyente(i4cContribuyente.getDni());
+		assertTrue(cOutput == (null));
+	}
+
+
+
+	/**
+	 * i5.a Contribuyente â€œ78934831Mâ€� intenta consultarse -> el sistema muestra los datos correctamente porque el contribuyente existe   
+	 */
+	@Test
+	public void i5a(){
+		Contribuyente cont  = gestion.contribuyente(i5aContribuyente.getDni());
+		if( cont != null){
+			for(Vehiculo v: cont.getListaVehiculos())
+				gestion.bajaVehiculo(v.getMatricula(), cont);
+
+			gestion.bajaContribuyente(i5aContribuyente.getDni());
+
+		}else{
+			Contribuyente c1 =  i5aContribuyente;
+
+			gestion.altaContribuyente(i5aContribuyente);
+			Contribuyente cOutput;
+			cOutput = gestion.contribuyente(i5aContribuyente.getDni());
+
+
+			assertTrue(comparaContribuyentes(i5aContribuyente,cOutput));
+		}
+
+	}
+
+	/**
+	 * i5.b Contribuyente â€œ78955831Mâ€� intenta consultarse -> se da un error porque el contribuyente no existe 
+	 */
+	@Test
+	public void i5b(){
+
+		Contribuyente cOutput;
+		cOutput = gestion.contribuyente(i5bContribuyente.getDni());
+		assertTrue(cOutput == (null));
+	}
+
+	/**
+	 * i6.a Se intenta consultar el total del contribuyente con DNI â€œ78934831Mâ€� -> como el contribuyente existe, retorna 239.8.
+	 */
+	@Test
+	public void i6a(){
+		Contribuyente cont  = gestion.contribuyente(i6aContribuyente.getDni());
+		if( cont != null){
+			for(Vehiculo v: cont.getListaVehiculos())
+				gestion.bajaVehiculo(v.getMatricula(), cont);
+
+			gestion.bajaContribuyente(i6aContribuyente.getDni());
+
+		}else{
+			Contribuyente c1 =  i6aContribuyente;
+
+			gestion.altaContribuyente(i6aContribuyente);
+			gestion.altaVehiculo(new Turismo("3456HDP", new Date(), 17), c1);
+			gestion.altaVehiculo(new Motocicleta(700, "1234BBB", new Date()), c1);
+		}
+			Double cOutput;
+			cOutput = gestion.totalContribuyente(i6aContribuyente.getDni());
+
+
+			assertTrue(cOutput == 239.8);		
+	}
+
+	/**
+	 * i6.b Se intenta consultar el total del contribuyente con DNI â€œ78934835Mâ€� -> como no existe, retorna un valor que indique fallo.
+	 */
+	@Test
+	public void i6b(){
+
+		Double cOutput;
+		cOutput = gestion.totalContribuyente(i6bContribuyente.getDni());
+		assertTrue(cOutput < 0.0);
+
+	}
+
+
+	/**
+	 * i6.c Se intenta consultar el total de un contribuyente con DNI â€œ72081145Zâ€�, que no tiene vehiÌ�culos -> retorna 0.
+	 */
+	@Test
+	public void i6c(){
+
+		gestion.altaContribuyente(i6cContribuyente);
+		Double cOutput;
+		cOutput = gestion.totalContribuyente(i6cContribuyente.getDni());
+
+
+		assertTrue(cOutput.equals(0.0));
+	}
+
+
+	/**
+	 * i7.a VehÃ­culo â€œ2020AAA 10/10/2003 para el usuario con DNI 72345121Aâ€� intenta darse de alta -> se da de alta correctamente 
+	 */
+	@Test
+	public void i7a(){
+
+		gestion.actualizaContribuyente(i7aContribuyente);
+		Vehiculo vOutput;
+		vOutput = gestion.altaVehiculo(i7aVehiculo, i7aContribuyente);
+		assertTrue(vOutput.equals(i7aVehiculo));
+	}
+
+	/**
+	 * i7.b VehÃ­culo â€œ2021AAA 10/10/2003 para el usuario con DNI 72355121Aâ€� intenta darse de alta -> se da un error porque no existe el contribuyente  
+	 */
+	@Test
+	public void i7b(){
+
+		gestion.bajaContribuyente(i7bContribuyente.getDni());
+		Vehiculo vOutput;
+		vOutput = gestion.altaVehiculo(i7bVehiculo, i7bContribuyente);
+		assertTrue(vOutput == (null));	
+	}
+
+	/**
+	 * i7.c VehÃ­culo â€œ2020AAA 10/10/2003 para el usuario con DNI 71345631Pâ€� intenta darse de alta -> se da un error porque ya existe el vehÃ­culo 
+	 */
+	@Test
+	public void i7c(){
+
+		gestion.altaContribuyente(i7cContribuyente);
+		gestion.altaVehiculo(i7cVehiculo, i7cContribuyente);
+
+		Vehiculo vOutput;
+		vOutput = gestion.altaVehiculo(i7cVehiculo, i7cContribuyente);
+		assertTrue(vOutput == (null));	
+	}
+
+
+	/**
+	 * i8.a VehÃ­culo â€œ2020AAA para el usuario con DNI 72345121Aâ€� intenta darse de baja -> se da de baja correctamente 
+	 */
+	@Test
+	public void i8a(){
+		gestion.altaContribuyente(i8aContribuyente);
+		gestion.altaVehiculo(i8aVehiculo, i8aContribuyente);
+
+		Vehiculo vOutput;
+		vOutput = gestion.bajaVehiculo(i8aVehiculo.getMatricula(), i8aContribuyente);
+		assertTrue(vOutput.equals(i8aVehiculo));
+	}
+
+	/**
+	 * i8.b VehÃ­culo â€œ2220AAA para el usuario con DNI 72345121Aâ€� intenta darse de baja -> se da un error porque no existe el vehÃ­culo 
+	 */
+	@Test
+	public void i8b(){
+
+
+
+		Vehiculo vOutput;
+		vOutput = gestion.bajaVehiculo(i8bVehiculo.getMatricula(), i8bContribuyente);
+		assertTrue(vOutput == (null));	
+	}
+
+	/**
+	 * i8.c VehÃ­culo â€œ2020AAA para el usuario con DNI 72215121Aâ€� intenta darse de baja -> se da un error porque no existe el contribuyente
+	 */
+	@Test
+	public void i8c(){
+
+		Vehiculo vOutput;
+		vOutput = gestion.bajaVehiculo(i8cVehiculo.getMatricula(), i8cContribuyente);
+		assertTrue(vOutput == (null));	
+	}
+
+	/**
+	 * i8.d VehÃ­culo â€œ1237HDT para el usuario con DNI 78493121Sâ€� intenta darse de baja -> se da un error porque el vehÃ­culo no pertenece al contribuyente 
+	 */
+	@Test
+	public void i8d(){
+
+
+		Vehiculo vOutput;
+		vOutput = gestion.bajaVehiculo(i8dVehiculo.getMatricula(), i8dContribuyente);
+		assertTrue(vOutput == (null));	
+	}
+
+	/**
+	 * i9.a VehiÌ�culo â€œ9424BGDâ€� intenta consultarse -> el sistema muestra los datos correctamente porque el vehiÌ�culo existe
+	 */
+	@Test
+	public void i9a(){
+
+
+		Vehiculo vOutput;
+		vOutput = gestion.vehiculo(i9aVehiculo.getMatricula());
+		assertTrue(vOutput.equals(i9aVehiculo));	
+	}
+
+
+	/**
+	 * i9.b VehiÌ�culo â€œ9424GGDâ€� intenta consultarse -> se da un error porque el vehiÌ�culo no existe
+	 */
+	@Test
+	public void i9b(){
+
+
+		Vehiculo vOutput;
+		vOutput = gestion.vehiculo(i9bVehiculo.getMatricula());
+		assertTrue(vOutput == null);	
+	}
+	/**
+	 * i10.a Intentamos actualizar un contribuyente con DNI “78934831M” cambiándole su segundo
+apellido por “López” -> se actualizan los datos correctamente porque el contribuyente existe y
+se devuelve el contribuyente actualizado.
+	 */
+	@Test
+	public void i10a(){
+
+
+		Contribuyente vOutput;
+		vOutput = gestion.actualizaContribuyente(i10aContribuyente);
+		assertTrue(vOutput.equals(i10aContribuyente));
+	}
+	/**
+	 * i10.b Intentamos actualizar un contribuyente con DNI “78935831M” cambiándole su segundo
+apellido por “López” -> se indica que ha habido un error porque no existe un contribuyente
+con dicho DNI y no se actualiza nada.
+	 */
+	@Test
+	public void i10b(){
+		Contribuyente vOutput;
+		vOutput = gestion.actualizaContribuyente(i10bContribuyente);
+		assertTrue(vOutput == null);	
+	}
+	/**
+	 * i11.a Se intenta consultar el listado de contribuyentes cuando no hay ninguno -> se devuelve una lista vacía
+	 */
+	@Test
+	public void i11a(){
+
+
+		int vOutput;
+		vOutput = gestion.contribuyentes().size();
+		assertTrue(vOutput == 0);	
+	}
+	/**
+	 * i11.b Se intenta consultar el listado de contribuyentes cuando sólo hay uno -> se devuelve una lista con un elemento
+	 */
+	@Test
+	public void i11b(){
+
+
+		int vOutput;
+		vOutput = gestion.contribuyentes().size();
+		assertTrue(vOutput == 1);	
+	}
+	/**
+	 * i11.c Se intenta consultar el listado de contribuyentes cuando hay varios -> se devuelve una lista con todos los contribuyentes
+	 */
+	@Test
+	public void i11c(){
+
+
+		int vOutput;
+		vOutput = gestion.contribuyentes().size();
+		assertTrue(vOutput > 1);	
+	}
+	/**
+	 * i12.a Intentamos actualizar un vehículo con matrícula “9424BGD” cambiándole su fecha de matriculación por “2014-05-05” -> se actualizan los datos correctamente porque el vehículo existe y se devuelve el vehículo actualizado.
+	 */
+	@Test
+	public void i12a(){
+		gestion.altaContribuyente(i12aContribuyente);
+		gestion.altaVehiculo(i12aVehiculo, i12aContribuyente);
+
+		Date currentDate = new Date();
+		Vehiculo vOutput;
+		i12aVehiculo.setFecha1Matriculacion(currentDate);
+		vOutput = gestion.actualizaVehiculo(i12aVehiculo);
+		assertTrue(vOutput.equals(i12aVehiculo));	
+	}
+	/**
+	 * i12.b Intentamos actualizar un vehículo con matrícula “9424GGD” cambiándole su fecha de matriculación por “2011-05-05” -> se indica que ha habido un error porque no existe un vehículo con dicha matrícula y no se actualiza nada.
+	 */
+
+	@Test
+	public void i12b(){
+		gestion.altaContribuyente(i12bContribuyente);
+		gestion.bajaVehiculo( i12bVehiculo.getMatricula(), i12bContribuyente);
+
+		i12bVehiculo.setFecha1Matriculacion(new Date());
+		Vehiculo vOutput;
+		vOutput = gestion.actualizaVehiculo(i12bVehiculo);
+		assertTrue(vOutput == null);		
+	}
+	/**
+	i13.a Se intenta consultar el listado de vehículos cuando no hay ninguno -> se devuelve una lista vacía	 
+	 */
+	@Test
+	public void i13a(){
+
+
+		int vOutput;
+		vOutput = gestion.vehiculos().size();
+		assertTrue(vOutput == 0);	
+	}
+	/**
+	i13.b Se intenta consultar el listado de vehículos cuando sólo hay uno -> se devuelve una lista con un elemento	
+	 */
+	@Test
+	public void i13b(){
+
+
+		int vOutput;
+		vOutput = gestion.vehiculos().size();
+		assertTrue(vOutput == 1);	
+	}
+	/**
+	 i13.c Se intenta consultar el listado de vehículos cuando hay varios -> se devuelve una lista con todos los vehículos
+	 */
+	@Test
+	public void i13c(){
+
+
+		int vOutput;
+		vOutput = gestion.vehiculos().size();
+		assertTrue(vOutput > 1);	
+	}
+	private boolean comparaContribuyentes(Contribuyente c1, Contribuyente c2){
+		if(c1.getNombre().equals(c2.getNombre()))
+			if(c1.getApellido1().equals(c2.getApellido1()))
+				if(c1.getApellido2().equals(c2.getApellido2()))
+					if(c1.getListaVehiculos().size() == c2.getListaVehiculos().size())
+						return true;
+		return false;
+
+	}
+}

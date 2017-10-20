@@ -64,45 +64,63 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 	}
 
 
-	public Vehiculo creaVehiculo(Vehiculo v) {
+	public Vehiculo creaVehiculo(Vehiculo v, String dni) {
+		Contribuyente c = datosContribuyente(dni);
+		if(c == null)
+			return null;
+
+		for(Vehiculo vehiculo: c.getListaVehiculos()){
+			if(v.getMatricula().equals(vehiculo.getMatricula())){
+				return null;
+			}
+		}
+		c.getListaVehiculos().add(v);
 		return v;
 	}
 
 
 	public Vehiculo eliminaVehiculo(String matricula) {
-		return vehiculo(matricula);
+
+
+		Vehiculo veh = null;
+		for(Contribuyente c: contribuyentes())
+			for(Vehiculo v: c.getListaVehiculos()){
+				if(v.getMatricula().equals(matricula)){
+					veh = v;
+					c.getListaVehiculos().remove(v);
+					break;
+				}
+			}
+		return veh;
 	}
 
 
 	public Vehiculo actualizaVehiculo(Vehiculo nuevo) {
-		for (int j=0; j< ayun.getContribuyentes().size();j++) {
-			for(int i=0; i<ayun.getContribuyentes().get(j).getListaVehiculos().size(); i++){
-				if (ayun.getContribuyentes().get(j).getListaVehiculos().get(i).getMatricula().equals(nuevo.getMatricula())) {
-					ayun.getContribuyentes().get(j).getListaVehiculos().remove(i);
-					ayun.getContribuyentes().get(j).getListaVehiculos().add(nuevo);
-					return nuevo;
+		for(Contribuyente c: contribuyentes())
+			for(Vehiculo v: c.getListaVehiculos()){
+				if(v.getMatricula().equals(nuevo.getMatricula())){
+					v = nuevo;
+					return v;
 				}
 			}
-		}
 		return null;
 	}
 
 
 	public Vehiculo vehiculo(String matricula) {
-		for (Contribuyente c:ayun.getContribuyentes()) {
-			for (Vehiculo v: c.getListaVehiculos()) {
-				if (v.getMatricula().equals(matricula)) {
-					return v;
-				}
+		for (Vehiculo v: vehiculos()) {
+			if (v.getMatricula().equals(matricula)) {
+				return v;
 			}
 		}
+
 		return null;
 	}
 
 
 	public List<Vehiculo> vehiculos() {
 		List<Vehiculo> vehiculos = new LinkedList<Vehiculo>();
-		for (Contribuyente c:ayun.getContribuyentes()) {
+		for (Contribuyente c: contribuyentes()) {
 			vehiculos.addAll(c.getListaVehiculos());
 		}
 		return vehiculos;
@@ -112,6 +130,9 @@ public class ImpuestosDAO implements IContribuyentesDAO, IVehiculosDAO {
 	public void finaliza() {
 		Ayuntamiento.flush(ayun);
 	}
+
+
+
 
 
 
