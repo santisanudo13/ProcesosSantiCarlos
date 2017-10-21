@@ -112,16 +112,18 @@ public class GestionImpuestoCirculacion implements IGestionContribuyentes, IGest
 	}
 
 
-	public Vehiculo bajaVehiculo(String matricula) {
+	public Vehiculo bajaVehiculo(String matricula, Contribuyente contribuyente) {
 
 
 		Vehiculo vehiculo = vehiculos.vehiculo(matricula);
 		if(vehiculo == null)
 			return null;
+		Contribuyente cont = contribuyentes.datosContribuyente(contribuyente.getDni());
+		if(cont == null)
+			return null;
 
-
-		for(Contribuyente c: contribuyentes())
-			for (Vehiculo v:c.getListaVehiculos()) {
+		
+			for (Vehiculo v:cont.getListaVehiculos()) {
 				if (v.getMatricula().equals(matricula)) {
 					Vehiculo veh = vehiculos.eliminaVehiculo(matricula);
 					if(veh == null)

@@ -27,7 +27,7 @@ public class PruebasUnitariasMetodoTest {
 
 
 	private static Contribuyente u3aContribuyente, u3bContribuyente, u4aContribuyente, u4bContribuyente,u4cContribuyente,
-	u7aContribuyente, u7bContribuyente,u7cContribuyente, u8aContribuyente ,u8cContribuyente, u8dContribuyente, 
+	u7aContribuyente, u7bContribuyente,u7cContribuyente, u8aContribuyente ,u8bContribuyente, u8cContribuyente, u8dContribuyente, 
 	u5aContribuyente, u5bContribuyente, u6aContribuyente, u6bContribuyente, u6cContribuyente, u10aContribuyente, u10bContribuyente,
 	u11bContribuyente,u11c1Contribuyente, u11c2Contribuyente, u11c3Contribuyente;
 	private static Vehiculo u7aVehiculo, u7bVehiculo, u7cVehiculo, u8aVehiculo, u8bVehiculo, u8cVehiculo, u8dVehiculo, u9aVehiculo,
@@ -91,6 +91,7 @@ public class PruebasUnitariasMetodoTest {
 		List<Vehiculo> listu8 = new ArrayList<Vehiculo>();
 		listu8.add(u8aVehiculo);
 		u8aContribuyente = new Contribuyente(listu8, "Lidia", "Lopez", "Revuelta", "72345121A");
+		u8bContribuyente = new Contribuyente(listu8, "Lidia", "Lopez", "Revuelta", "72345121A");
 		u8cContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121A");
 		u8dContribuyente = new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "78493121S");
 
@@ -318,7 +319,7 @@ public class PruebasUnitariasMetodoTest {
 
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(u8aVehiculo.getMatricula());
+		vOutput = gestion.bajaVehiculo(u8aVehiculo.getMatricula(), u8aContribuyente);
 		assertTrue(vOutput.equals(u8aVehiculo));
 	}
 
@@ -328,11 +329,10 @@ public class PruebasUnitariasMetodoTest {
 	@Test
 	public void u8b(){
 		when(vehiculos.eliminaVehiculo(u8bVehiculo.getMatricula())).thenReturn(null); 
-		when(contribuyentes.actualizaContribuyente(u8aContribuyente)).thenReturn(u8aContribuyente);
 
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(u8bVehiculo.getMatricula());
+		vOutput = gestion.bajaVehiculo(u8bVehiculo.getMatricula(), u8bContribuyente);
 		assertTrue(vOutput == (null));	
 	}
 
@@ -347,7 +347,7 @@ public class PruebasUnitariasMetodoTest {
 		when(contribuyentes.actualizaContribuyente(u8cContribuyente)).thenReturn(null);
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(u8cVehiculo.getMatricula());
+		vOutput = gestion.bajaVehiculo(u8cVehiculo.getMatricula(), u8cContribuyente);
 		assertTrue(vOutput == (null));	
 	}
 
@@ -361,7 +361,7 @@ public class PruebasUnitariasMetodoTest {
 
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(u8dVehiculo.getMatricula());
+		vOutput = gestion.bajaVehiculo(u8dVehiculo.getMatricula(), u8dContribuyente);
 		assertTrue(vOutput == (null));	
 	}
 

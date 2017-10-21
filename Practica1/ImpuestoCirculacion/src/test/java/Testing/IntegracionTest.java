@@ -34,7 +34,7 @@ public class IntegracionTest {
 
 
 	private static Contribuyente i3aContribuyente, i3bContribuyente, i4aContribuyente, i4bContribuyente,i4cContribuyente,
-	i7aContribuyente, i7bContribuyente,i7cContribuyente, i8aContribuyente, i5aContribuyente, i5bContribuyente, i6aContribuyente, i6bContribuyente, i6cContribuyente,i9aContribuyente, i10aContribuyente, i10bContribuyente,
+	i7aContribuyente, i7bContribuyente,i7cContribuyente, i8aContribuyente, i8bContribuyente, i8cContribuyente, i8dContribuyente, i5aContribuyente, i5bContribuyente, i6aContribuyente, i6bContribuyente, i6cContribuyente,i9aContribuyente, i10aContribuyente, i10bContribuyente,
 	i11bContribuyente,i11c1Contribuyente, i11c2Contribuyente, i11c3Contribuyente, i12aContribuyente, i12bContribuyente;
 	private static Vehiculo i7aVehiculo, i7bVehiculo, i7cVehiculo, i8aVehiculo, i8bVehiculo, i8cVehiculo, i8dVehiculo, i9aVehiculo,
 	i9bVehiculo, i12aVehiculo, i12bVehiculo, i13bVehiculo, i13c1Vehiculo, i13c2Vehiculo, i13c3Vehiculo;
@@ -48,7 +48,7 @@ public class IntegracionTest {
 			Contribuyente cont = datos.contribuyentes().get(0);
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 		}
@@ -123,6 +123,10 @@ public class IntegracionTest {
 		listi8.add(i8aVehiculo);
 		i9aContribuyente = new Contribuyente(listi8, "Carlos", "Diaz", "manjon", "33344455A");
 		i8aContribuyente = new Contribuyente(listi8, "Lidia", "Lopez", "Revuelta", "72345121A");
+		i8bContribuyente = new Contribuyente(listi8, "Pedro", "Sanchez", "Lolin", "72345133B");
+		i8cContribuyente = new Contribuyente(listi8, "Pedro", "Sanchez", "Lolin", "72345145C");
+		i8dContribuyente = new Contribuyente(listi8, "Lidia", "Lopez", "Revuelta", "72345156D");
+
 		new Contribuyente(listi8, "Lidia", "Lopez", "Revuelta", "72345121A");
 		new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121X");
 		new Contribuyente(new ArrayList<Vehiculo>(), "Victor", "Gomez", "Cobo", "72215121X");
@@ -170,7 +174,7 @@ public class IntegracionTest {
 		if(cont != null){
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 
@@ -216,7 +220,7 @@ public class IntegracionTest {
 		if(cont != null){
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 
@@ -250,7 +254,7 @@ public class IntegracionTest {
 		if(cont != null){
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 
@@ -325,7 +329,7 @@ public class IntegracionTest {
 		if(cont != null){
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 
@@ -359,7 +363,7 @@ public class IntegracionTest {
 		if(cont != null){
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 
@@ -383,7 +387,7 @@ public class IntegracionTest {
 		if(cont != null){
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 
@@ -392,7 +396,7 @@ public class IntegracionTest {
 		gestion.altaVehiculo(i8aVehiculo, i8aContribuyente);
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(i8aVehiculo.getMatricula());
+		vOutput = gestion.bajaVehiculo(i8aVehiculo.getMatricula(), i8aContribuyente);
 		assertTrue(vOutput.equals(i8aVehiculo));
 	}
 
@@ -405,7 +409,7 @@ public class IntegracionTest {
 
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(i8bVehiculo.getMatricula());
+		vOutput = gestion.bajaVehiculo(i8bVehiculo.getMatricula(), i8bContribuyente);
 		assertTrue(vOutput == (null));	
 	}
 
@@ -416,7 +420,7 @@ public class IntegracionTest {
 	public void i8c(){
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(i8cVehiculo.getMatricula());
+		vOutput = gestion.bajaVehiculo(i8cVehiculo.getMatricula(), i8cContribuyente);
 		assertTrue(vOutput == (null));	
 	}
 
@@ -428,7 +432,7 @@ public class IntegracionTest {
 
 
 		Vehiculo vOutput;
-		vOutput = gestion.bajaVehiculo(i8dVehiculo.getMatricula());
+		vOutput = gestion.bajaVehiculo(i8dVehiculo.getMatricula(), i8dContribuyente);
 		assertTrue(vOutput == (null));	
 	}
 
@@ -442,7 +446,7 @@ public class IntegracionTest {
 		if(cont != null){
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 
@@ -500,7 +504,7 @@ con dicho DNI y no se actualiza nada.
 			Contribuyente cont = datos.contribuyentes().get(0);
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 		}
@@ -518,7 +522,7 @@ con dicho DNI y no se actualiza nada.
 			Contribuyente cont = datos.contribuyentes().get(0);
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 		}
@@ -537,7 +541,7 @@ con dicho DNI y no se actualiza nada.
 			Contribuyente cont = datos.contribuyentes().get(0);
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 		}
@@ -570,7 +574,7 @@ con dicho DNI y no se actualiza nada.
 	@Test
 	public void i12b(){
 		gestion.altaContribuyente(i12bContribuyente);
-		gestion.bajaVehiculo( i12bVehiculo.getMatricula());
+		gestion.bajaVehiculo( i12bVehiculo.getMatricula(), i12bContribuyente);
 
 		i12bVehiculo.setFecha1Matriculacion(new Date());
 		Vehiculo vOutput;
@@ -586,7 +590,7 @@ con dicho DNI y no se actualiza nada.
 			Contribuyente cont = datos.contribuyentes().get(0);
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 		}
@@ -604,7 +608,7 @@ con dicho DNI y no se actualiza nada.
 			Contribuyente cont = datos.contribuyentes().get(0);
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 		}
@@ -625,7 +629,7 @@ con dicho DNI y no se actualiza nada.
 			Contribuyente cont = datos.contribuyentes().get(0);
 			if(!cont.getListaVehiculos().isEmpty()){
 				while(!cont.getListaVehiculos().isEmpty())
-					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula());
+					gestion.bajaVehiculo(cont.getListaVehiculos().get(0).getMatricula(), cont);
 			}
 			gestion.bajaContribuyente(cont.getDni());
 		}
